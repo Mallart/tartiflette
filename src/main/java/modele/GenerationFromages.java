@@ -15,7 +15,9 @@ public class GenerationFromages {
 		System.out.println();
 		mesArticles.regénérationDuStock();
 		System.out.println(mesArticles.toStringArticlesEtStock());
-		new NosFromages(mesArticles);
+		NosFromages.listFromages = mesArticles;
+		String[] winArgs = {};
+		NosFromages.main(winArgs);
 		System.out.println("Erreurs de saisie : ");
 		System.out.println(mesArticles.vérificationSaisie());
 	}

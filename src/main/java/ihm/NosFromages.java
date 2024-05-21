@@ -21,7 +21,7 @@ public class NosFromages extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNomDuFromage;
-	private static Fromages listFromages;
+	public static Fromages listFromages;
 
 	/**
 	 * Launch the application.
