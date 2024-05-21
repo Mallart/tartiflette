@@ -21,17 +21,17 @@ public class NosFromages extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNomDuFromage;
-	public static Fromages listFromages;
+	private Fromages listFromages;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(Fromages fromages) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					NosFromages frame = new NosFromages(listFromages);
-					new FromageDescription(GenerationFromages.générationBaseFromages().getFromages().get(0)).setVisible(true);
+					NosFromages frame = new NosFromages(fromages);
+					new FromageDescription(fromages.getFromages().get(0)).setVisible(true);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
