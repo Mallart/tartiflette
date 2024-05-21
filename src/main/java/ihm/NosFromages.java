@@ -54,7 +54,6 @@ public class NosFromages extends JFrame {
 		
 		JScrollPane listeFromages = new JScrollPane();
 		contentPane.add(listeFromages);
-		listeFromages.add(listeFromages);
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);

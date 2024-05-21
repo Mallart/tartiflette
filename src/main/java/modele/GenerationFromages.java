@@ -16,7 +16,7 @@ public class GenerationFromages {
 		mesArticles.regénérationDuStock();
 		System.out.println(mesArticles.toStringArticlesEtStock());
 		String[] windowArgs = {""};
-		NosFromages.main(windowArgs);
+		new NosFromages(mesArticles);
 		System.out.println("Erreurs de saisie : ");
 		System.out.println(mesArticles.vérificationSaisie());
 	}
