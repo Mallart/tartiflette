@@ -1,5 +1,5 @@
 package modele;
-
+import ihm.*;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,6 +15,8 @@ public class GenerationFromages {
 		System.out.println();
 		mesArticles.regénérationDuStock();
 		System.out.println(mesArticles.toStringArticlesEtStock());
+		String[] windowArgs = {""};
+		NosFromages.main(windowArgs);
 		System.out.println("Erreurs de saisie : ");
 		System.out.println(mesArticles.vérificationSaisie());
 	}
