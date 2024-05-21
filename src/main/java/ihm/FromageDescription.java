@@ -9,12 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSplitPane;
 import java.awt.BorderLayout;
+import java.awt.ComponentOrientation;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
@@ -22,11 +26,16 @@ import javax.swing.ImageIcon;
 import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import javax.swing.Icon;
+import java.awt.FlowLayout;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JTextPane;
+import java.awt.Component;
+import javax.swing.JTextArea;
 
 public class FromageDescription extends JFrame {
 
 	private JPanel contentPane;
-	private Fromage fromage;
 
 	/**
 	 * Launch the application.
@@ -48,25 +57,49 @@ public class FromageDescription extends JFrame {
 	 * Create the frame.
 	 */
 	public FromageDescription(Fromage fromage) {
-		this.fromage = fromage;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 684, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		ImageIcon fromageIcon = new ImageIcon(this.fromage.getNomImage());
+		ImageIcon fromageIcon = new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\resources\\images\\fromages\\hauteur200\\"+ fromage.getNomImage() + ".jpg");
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.WEST);
+		JPanel leftPanel = new JPanel();
+		leftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		contentPane.add(leftPanel, BorderLayout.WEST);
+		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+		JLabel nomFromage = new JLabel(fromage.getDésignation());
+		nomFromage.setFont(new Font("Stencil", Font.PLAIN, 24));
 		
-		JLabel nomFromages = new JLabel((String) null);
-		nomFromages.setFont(new Font("Stencil", Font.PLAIN, 24));
-		panel.add(nomFromages);
+		JLabel fromageImage = new JLabel(fromageIcon);
 		
-		JLabel label = new JLabel((Icon) null);
-		panel.add(label);
+		nomFromage.setAlignmentX(CENTER_ALIGNMENT);
+		fromageImage.setAlignmentX(CENTER_ALIGNMENT);
+		
+		leftPanel.add(nomFromage);
+		leftPanel.add(fromageImage);
+		
+		JPanel rightPanel = new JPanel();
+		rightPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		rightPanel.setLayout(new BoxLayout(rightPanel, BoxLayout.Y_AXIS));
+		contentPane.add(rightPanel, BorderLayout.CENTER);
+		
+		JLabel desc = new JLabel("Description");
+		rightPanel.add(desc);
+		
+		JTextArea description = new JTextArea();
+		description.setEditable(false);
+		description.setWrapStyleWord(true);
+		description.setLineWrap(true);
+		
+		description.setForeground(new Color(0,0,0));
+		description.setText(fromage.getDescription());
+		rightPanel.add(description);
+		
+		JPanel bottomPanel = new JPanel();
+		contentPane.add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 }
