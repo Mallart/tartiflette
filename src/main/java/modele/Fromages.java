@@ -43,7 +43,14 @@ public class Fromages {
 
 	// A compléter !
 	public List<Fromage> fromagesAuLaitDe(TypeLait lait) {
-		return null;
+		List<Fromage> typeFromage = new LinkedList<Fromage>();
+		for(Fromage f:this.fromages) {
+			if(f.getTypeFromage() == lait) {
+				typeFromage.add(f);
+			}
+		}
+		
+		return typeFromage;
 	}
 
 	public List<Fromage> getFromages() {

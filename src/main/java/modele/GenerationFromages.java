@@ -338,6 +338,7 @@ public class GenerationFromages {
 		                        + "seront plus prononcées en s'affinant.",
 		                TypeVente.A_L_UNITE, new String[] { "" },
 		                new float[] { 3.99F }) };
+		
 		for (SaisieFromage s : fromages) {
 			fromagesAuLaitDeChèvre.add(s.builderFromage());
 		}
@@ -794,6 +795,8 @@ public class GenerationFromages {
 		                        + "macéré dans une saumure, celle-ci est donc souple et offre une odeur puissante accompagné d’un goût prononcé, salé et légèrement piquant.",
 		                TypeVente.A_L_UNITE, new String[] { "" },
 		                new float[] { 6.99F }) };
+		
+		
 		for (SaisieFromage s : fromages) {
 			fromagesAuLaitDeVache.add(s.builderFromage());
 		}
