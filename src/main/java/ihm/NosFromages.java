@@ -24,16 +24,14 @@ import javax.swing.JComboBox;
 import java.awt.Dimension;
 import modele.*;
 import javax.swing.JList;
+import javax.swing.ScrollPaneConstants;
 
 public class NosFromages extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNomDuFromage;
 	private Fromages listFromages;
-
-	/**
-	 * Launch the application.
-	 */
+	
 	private void showCheese(int cheeseIndex)
 	{
 		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex)).setVisible(true);
@@ -99,9 +97,13 @@ public class NosFromages extends JFrame {
 		comboBox.setName("");
 		comboBox.setToolTipText("Type de lait");
 		panel_1.add(comboBox, BorderLayout.EAST);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		contentPane.add(scrollPane, BorderLayout.CENTER);
+		
+		JList fromageJlist = new JList<String>();
+		scrollPane.setViewportView(fromageJlist);
 		System.out.println("------------------------------------------------");
-		JList<String> fromageJlist = new JList<String>();
-		contentPane.add(fromageJlist, BorderLayout.CENTER);
 		System.out.println("------------------------------------------------");
 		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		for(Fromage f: listFromages.getFromages()) {
@@ -114,7 +116,6 @@ public class NosFromages extends JFrame {
 				showCheese(fromageJlist.getSelectedIndex());
 			}
 		});
-		
 		System.out.println("------------------------------------------------");
 	}
 }
