@@ -90,7 +90,7 @@ public class Coordonnées extends JFrame {
         // Load and resize the PayPal image
         ImageIcon icon = new ImageIcon("C:\\Users\\Diego\\Downloads\\Paypal_2014_logo.png");
         Image img = icon.getImage();
-        Image resizedImage = img.getScaledInstance(20, 20, Image.SCALE_SMOOTH); // Adjust the size as needed
+        Image resizedImage = img.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Adjust the size as needed
         icon = new ImageIcon(resizedImage);
         paypalLabel.setIcon(icon);
 
