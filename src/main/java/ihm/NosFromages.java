@@ -29,19 +29,26 @@ public class NosFromages extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	private void showCheese(int cheeseIndex)
+	{
+		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex)).setVisible(true);
+	}
+	
+	
 	public static void main(Fromages fromages) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					NosFromages frame = new NosFromages(fromages);
 					frame.setVisible(true);
-					new FromageDescription(fromages.getFromages().get(0)).setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 	}
+	
 
 	/**
 	 * Create the frame.
@@ -63,8 +70,6 @@ public class NosFromages extends JFrame {
 		Panier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("button clicked");
-				setVisible(false);
-				Panier.setText(System.out.toString());
 			}
 		});
 		panel.setLayout(new BorderLayout(0, 0));
@@ -91,7 +96,7 @@ public class NosFromages extends JFrame {
 		panel_1.add(comboBox, BorderLayout.EAST);
 		System.out.println("------------------------------------------------");
 		JList<String> fromageJlist = new JList<String>();
-		contentPane.add(fromageJlist, BorderLayout.SOUTH);
+		contentPane.add(fromageJlist, BorderLayout.CENTER);
 		System.out.println("------------------------------------------------");
 		DefaultListModel<String> DLM = new DefaultListModel<String>();
 		for(Fromage f: listFromages.getFromages()) {
