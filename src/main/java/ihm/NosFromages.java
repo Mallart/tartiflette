@@ -91,24 +91,47 @@ public class NosFromages extends JFrame {
 		txtNomDuFromage.setToolTipText("NomFromgage");
 		panel_1.add(txtNomDuFromage, BorderLayout.CENTER);
 		txtNomDuFromage.setColumns(10);
-		System.out.println("------------------------------------------------");
-		JComboBox comboBox = new JComboBox();
-		comboBox.setPreferredSize(new Dimension(100, 22));
-		comboBox.setName("");
-		comboBox.setToolTipText("Type de lait");
-		panel_1.add(comboBox, BorderLayout.EAST);
 		
+		String typeDeLaitArray[] = {"Tous","Vache","Chèvre","Brebis"};
+		JComboBox<String> selectionDeLait = new JComboBox<String>(typeDeLaitArray);
+		selectionDeLait.setPreferredSize(new Dimension(100, 22));
+		selectionDeLait.setName("");
+		selectionDeLait.setToolTipText("Type de lait");
+		panel_1.add(selectionDeLait, BorderLayout.EAST);
+		
+
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		JList<String> fromageJlist = new JList<String>();
+
+		JList <String> fromageJlist = new JList<String>();
+
 		scrollPane.setViewportView(fromageJlist);
-		System.out.println("------------------------------------------------");
-		System.out.println("------------------------------------------------");
 		DefaultListModel<String> DLM = new DefaultListModel<String>();
-		for(Fromage f: listFromages.getFromages()) {
-			DLM.addElement(f.getDésignation());
+		printListToVP(listFromages, fromageJlist, DLM,selectionDeLait);
+		refreshList(DLM, selectionDeLait);
+	}
+	
+	private void refreshList(DefaultListModel<String> DLM, JComboBox<String> typeDeLait)
+	{
+		DLM.removeAllElements();
+		for(Fromage f : listFromages.getFromages()) {
+			if(f.getTypeFromage().getTypeDeLait() == typeDeLait.getSelectedItem()) {
+				DLM.addElement(f.getDésignation());
+			}else if(typeDeLait.getSelectedItem() ==  "Tous") {
+				DLM.addElement(f.getDésignation());
+			}
 		}
+	}
+
+	private void printListToVP(Fromages listFromages, JList <String> fromageJlist, DefaultListModel<String> DLM,JComboBox<String> typeDeLait) {
+		
+		typeDeLait.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				refreshList(DLM, typeDeLait);
+			}
+		});
 		fromageJlist.setModel(DLM);
 		fromageJlist.addMouseListener(new MouseAdapter(){
 			public void mousePressed(MouseEvent e)
@@ -116,6 +139,5 @@ public class NosFromages extends JFrame {
 				showCheese(fromageJlist.getSelectedIndex());
 			}
 		});
-		System.out.println("------------------------------------------------");
 	}
 }
