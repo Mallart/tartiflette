@@ -11,6 +11,11 @@ import java.awt.BorderLayout;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -103,6 +108,12 @@ public class NosFromages extends JFrame {
 			DLM.addElement(f.getDésignation());
 		}
 		fromageJlist.setModel(DLM);
+		fromageJlist.addMouseListener(new MouseAdapter(){
+			public void mousePressed(MouseEvent e)
+			{
+				showCheese(fromageJlist.getSelectedIndex());
+			}
+		});
 		
 		System.out.println("------------------------------------------------");
 	}
