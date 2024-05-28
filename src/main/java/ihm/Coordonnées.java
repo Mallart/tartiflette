@@ -9,19 +9,14 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
 import java.awt.FlowLayout;
-import javax.swing.border.LineBorder;
-
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JRadioButton;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Component;
-import javax.swing.BoxLayout;
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EtchedBorder;
 
 public class Coordonnées extends JFrame {
