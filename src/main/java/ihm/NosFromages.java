@@ -101,7 +101,7 @@ public class NosFromages extends JFrame {
 		JScrollPane scrollPane = new JScrollPane();
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 		
-		JList fromageJlist = new JList<String>();
+		JList<String> fromageJlist = new JList<String>();
 		scrollPane.setViewportView(fromageJlist);
 		System.out.println("------------------------------------------------");
 		System.out.println("------------------------------------------------");

@@ -17,7 +17,13 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.swing.BoxLayout;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 
 public class Panier extends JFrame {
@@ -27,6 +33,12 @@ public class Panier extends JFrame {
 	private JTextField price_exVAT;
 	private JTextField price_transportFees;
 	private JTextField price_total;
+	private List<String> transporters = new ArrayList<String>(){{
+		add("FedEx");
+		add("Colissimo");
+		add("La Poste");
+		add("Papi");
+	}};
 
 	/**
 	 * Launch the application.
@@ -93,7 +105,6 @@ public class Panier extends JFrame {
 		panel_transport.add(img_transporterLogo, BorderLayout.WEST);
 		
 		JComboBox cmb_transporter = new JComboBox();
-		cmb_transporter.setSelectedIndex(0);
 		panel_transport.add(cmb_transporter, BorderLayout.EAST);
 		
 		JPanel panel_totals_prices = new JPanel();
@@ -145,6 +156,9 @@ public class Panier extends JFrame {
 		
 		JButton btn_continueShopping = new JButton("Continuer les achats");
 		panel_actions.add(btn_continueShopping);
+		cmb_transporter.setModel(new DefaultComboBoxModel<String>() {{for(String transporter : transporters) addElement(transporter);}});
+		
+		cmb_transporter.setSelectedIndex(0);
 	}
 
 }
