@@ -84,13 +84,14 @@ public class Coordonnées extends JFrame {
 
         // PayPal radio button with image
         JPanel paypalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        paypalPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         paypalRadioButton = new JRadioButton("PayPal");
         JLabel paypalLabel = new JLabel();
 
         // Load and resize the PayPal image
-        ImageIcon icon = new ImageIcon("C:\\Users\\Diego\\Downloads\\Paypal_2014_logo.png");
+        ImageIcon icon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\PP.png");
         Image img = icon.getImage();
-        Image resizedImage = img.getScaledInstance(70, 70, Image.SCALE_SMOOTH); // Adjust the size as needed
+        Image resizedImage = img.getScaledInstance(60, 60, Image.SCALE_SMOOTH); // Adjust the size as needed
         icon = new ImageIcon(resizedImage);
         paypalLabel.setIcon(icon);
 
