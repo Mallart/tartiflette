@@ -84,29 +84,51 @@ public class Coordonnées extends JFrame {
 
         // PayPal radio button with image
         JPanel paypalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        paypalPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
         paypalRadioButton = new JRadioButton("PayPal");
         JLabel paypalLabel = new JLabel();
 
         // Load and resize the PayPal image
-        ImageIcon icon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\PP.png");
-        Image img = icon.getImage();
-        Image resizedImage = img.getScaledInstance(60, 60, Image.SCALE_SMOOTH); // Adjust the size as needed
-        icon = new ImageIcon(resizedImage);
-        paypalLabel.setIcon(icon);
+        ImageIcon paypalIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\PP.png");
+        Image paypalImg = paypalIcon.getImage();
+        Image resizedPaypalImage = getScaledImage(paypalImg, 40);
+        paypalIcon = new ImageIcon(resizedPaypalImage);
+        paypalLabel.setIcon(paypalIcon);
 
         paypalPanel.add(paypalRadioButton);
         paypalPanel.add(paypalLabel);
         paymentPanel.add(paypalPanel);
 
+        // Credit card radio button with image
+        JPanel creditCardPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         creditCardRadioButton = new JRadioButton("Carte de crédit");
+        JLabel creditCardLabel = new JLabel();
+
+        // Load and resize the credit card image
+        ImageIcon creditCardIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\CB.png");
+        Image creditCardImg = creditCardIcon.getImage();
+        Image resizedCreditCardImage = getScaledImage(creditCardImg, 30);
+        creditCardIcon = new ImageIcon(resizedCreditCardImage);
+        creditCardLabel.setIcon(creditCardIcon);
+
+        creditCardPanel.add(creditCardRadioButton);
+        creditCardPanel.add(creditCardLabel);
+        paymentPanel.add(creditCardPanel);
+
+        // Cheque radio button with image
+        JPanel chequePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         chequeRadioButton = new JRadioButton("Paiement par chèque");
-        ButtonGroup paymentGroup = new ButtonGroup();
-        paymentGroup.add(paypalRadioButton);
-        paymentGroup.add(creditCardRadioButton);
-        paymentGroup.add(chequeRadioButton);
-        paymentPanel.add(creditCardRadioButton);
-        paymentPanel.add(chequeRadioButton);
+        JLabel chequeLabel = new JLabel();
+
+        // Load and resize the cheque image
+        ImageIcon chequeIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\CQ.png");
+        Image chequeImg = chequeIcon.getImage();
+        Image resizedChequeImage = getScaledImage(chequeImg, 40);
+        chequeIcon = new ImageIcon(resizedChequeImage);
+        chequeLabel.setIcon(chequeIcon);
+
+        chequePanel.add(chequeRadioButton);
+        chequePanel.add(chequeLabel);
+        paymentPanel.add(chequePanel);
 
         // Newsletter subscription
         JPanel newsletterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -182,5 +204,10 @@ public class Coordonnées extends JFrame {
                 .addComponent(validerButton)
                 .addComponent(annulerButton))
         );
+    }
+
+    private Image getScaledImage(Image srcImg, int height) {
+        int width = (int) (height * ((double) srcImg.getWidth(null) / srcImg.getHeight(null)));
+        return srcImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
     }
 }
