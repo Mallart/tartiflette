@@ -21,7 +21,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
-public class Coordonnées extends JFrame {
+public class CoordonnéesWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -32,7 +32,7 @@ public class Coordonnées extends JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			try {
-				Coordonnées frame = new Coordonnées();
+				CoordonnéesWindow frame = new CoordonnéesWindow();
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -40,7 +40,7 @@ public class Coordonnées extends JFrame {
 		});
 	}
 
-	public Coordonnées() {
+	public CoordonnéesWindow() {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(100, 100, 800, 600);
 		this.contentPane = new JPanel(new BorderLayout());
@@ -152,7 +152,7 @@ public class Coordonnées extends JFrame {
 		});
 
 		annulerButton.addActionListener(e -> {
-			this.dispose();
+			this.hide();
 		});
 	}
 
