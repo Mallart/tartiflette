@@ -9,6 +9,14 @@ public class Panier {
 		this.articlePanier = new ArrayList<Article>();
 	}
 	
+	public float prixTotalPanier()
+	{
+		float sum = 0.f;
+		for(Article article : articlePanier)
+			sum += article.getPrixTTC();
+		return sum;
+	}
+	
 	public float prixTotalArticle(Article article) {
 		return article.getQuantitéEnStock() * article.getPrixTTC();
 	}

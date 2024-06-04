@@ -143,6 +143,7 @@ public class FromageDescription extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				ajouterArticlePanier(panier, fromage.getArticles().get(cmb_selectPrice.getSelectedIndex()), (int)spn_quantity.getValue());
+				hide();
 			}
 		});
 		addCancel.add(btn_addBasket);
@@ -161,10 +162,9 @@ public class FromageDescription extends JFrame {
 	private void ajouterArticlePanier(Panier panier, Article article, int quantity)
 	{
 		panier.ajouterArticlePanier(article, quantity);
+		System.out.println("...");
 		for(int i = 0; i < panier.getTaillePanier(); i++)
-		{
-			System.out.println(panier.getArticle(i));
-		}
+			System.out.println("Ajouté: " + panier.getArticle(i));
 	}
 	
 	private void updateMaxQuantity(JSpinner spn_quantity, Fromage fromage, int articleIndex)
