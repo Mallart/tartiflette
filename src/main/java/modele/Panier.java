@@ -9,22 +9,25 @@ public class Panier {
 		this.articlePanier = new ArrayList<Article>();
 	}
 	
-	public float prixTotalArticle(Article artcile) {
-		return artcile.getQuantitéEnStock() * artcile.getPrixTTC();
-	}
-	
-	public int quantiteArticle(Article article) {
-		return article.getQuantitéEnStock();
-	}
-	
-	public float prixArticle(Article article) {
-		return article.getPrixTTC();
+	public float prixTotalArticle(Article article) {
+		return article.getQuantitéEnStock() * article.getPrixTTC();
 	}
 	
 	public void ajouterArticlePanier(Article article) {
 		articlePanier.add(article);
 	}
 	
+	public float totalSansFraisDePort() {
+		float sommes = 0;
+		for(Article art: articlePanier) {
+			return sommes += art.getPrixTTC();		
+		}
+		return sommes;
+	}
+	
+	public float totalPanier(float fraisDePort) {
+		return totalSansFraisDePort() + fraisDePort;
+	}
 	
 	
 	
