@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.JSplitPane;
 import javax.swing.JLabel;
 import javax.swing.JButton;
@@ -76,6 +77,8 @@ public class PanierWindow extends JFrame {
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		
+		Float prixLivraison = 0.f;
 
 		setContentPane(contentPane);
 		
@@ -97,7 +100,7 @@ public class PanierWindow extends JFrame {
 		splitPane_2.setRightComponent(btn_recalc_Basket);
 		
 		products = new JTable();
-		productsTableModel = new DefaultTableModel(columnsName, 0);
+		products.setRowSelectionAllowed(false);
 		
 		splitPane_1.setRightComponent(products);
 		
@@ -145,19 +148,19 @@ public class PanierWindow extends JFrame {
 		panel_prices.setLayout(new BoxLayout(panel_prices, BoxLayout.Y_AXIS));
 		
 		price_exVAT = new JTextField();
-		price_exVAT.setText("XX,XX €");
+		price_exVAT.setText(((Float)panier.prixTotalPanier()).toString());
 		price_exVAT.setEditable(false);
 		panel_prices.add(price_exVAT);
 		price_exVAT.setColumns(10);
 		
 		price_transportFees = new JTextField();
-		price_transportFees.setText("XX,XX €");
+		price_transportFees.setText(((Float)prixLivraison).toString());
 		price_transportFees.setEditable(false);
 		panel_prices.add(price_transportFees);
 		price_transportFees.setColumns(10);
 		
 		price_total = new JTextField();
-		price_total.setText("XX,XX €");
+		price_total.setText(((Float)(panier.prixTotalPanier() + prixLivraison)).toString());
 		price_total.setEditable(false);
 		panel_prices.add(price_total);
 		price_total.setColumns(10);
@@ -182,18 +185,25 @@ public class PanierWindow extends JFrame {
 		cmb_transporter.setSelectedIndex(0);
 		
 		panel_actions.add(btn_continueShopping);
-		FillTable(panier, (DefaultTableModel)products.getModel());
+		FillTable(panier);
 	}
 	
-	private void FillTable(Panier panier, DefaultTableModel dtm)
+	private void FillTable(Panier panier)
 	{
-		while(dtm.getColumnCount() > 0)
-			dtm.removeRow(0);
+		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0)
+		{
+			@Override
+			public boolean isCellEditable(int row, int column)
+			{
+				return false;
+			}
+		};
 		for(int i = 0; i < panier.getTaillePanier(); i++)
 		{
 			Article article = panier.getArticle(i);
-			dtm.addRow(new Object[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé(), article.getPrixTTC() });
+			dtm.addRow(new String[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé(),  ((Float)article.getPrixTTC()).toString() });
 		}
+		products.setModel((TableModel)dtm);
 	}
 
 }
