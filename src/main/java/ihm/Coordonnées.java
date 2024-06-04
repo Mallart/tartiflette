@@ -1,213 +1,201 @@
 package ihm;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Insets;
+
+import javax.swing.BorderFactory;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 public class Coordonnées extends JFrame {
 
-    private static final long serialVersionUID = 1L;
-    private JPanel contentPane;
-    private JTextField nomField, prenomField, adresse1Field, adresse2Field, codePostalField, villeField, telephoneField, mailField;
-    private JRadioButton paypalRadioButton, creditCardRadioButton, chequeRadioButton, ouiRadioButton, nonRadioButton;
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField nomField, prenomField, adresse1Field, adresse2Field, codePostalField, villeField, telephoneField,
+			mailField;
+	private JRadioButton paypalRadioButton, creditCardRadioButton, chequeRadioButton, ouiRadioButton, nonRadioButton;
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            try {
-                Coordonnées frame = new Coordonnées();
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+	public static void main(String[] args) {
+		SwingUtilities.invokeLater(() -> {
+			try {
+				Coordonnées frame = new Coordonnées();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
-    /**
-     * Create the frame.
-     */
-    public Coordonnées() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 600, 500);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        
-        initComponents();
-    }
+	public Coordonnées() {
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 800, 600);
+		this.contentPane = new JPanel(new BorderLayout());
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.setContentPane(this.contentPane);
 
-    private void initComponents() {
-        contentPane.setLayout(new BorderLayout());
+		this.initComponents();
+	}
 
-        // Creating the main panel
-        JPanel mainPanel = new JPanel();
-        mainPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-        contentPane.add(mainPanel, BorderLayout.CENTER);
-        
-        // Layout for main panel
-        GroupLayout layout = new GroupLayout(mainPanel);
-        mainPanel.setLayout(layout);
-        layout.setAutoCreateGaps(true);
-        layout.setAutoCreateContainerGaps(true);
+	private void initComponents() {
+		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		JLabel titleLabel = new JLabel("Vos coordonnées");
+		titleLabel.setFont(new Font("Serif", Font.BOLD, 24)); // Set the font size and style
+		titlePanel.add(titleLabel);
+		this.contentPane.add(titlePanel, BorderLayout.NORTH);
 
-        // Creating labels and text fields
-        JLabel nomLabel = new JLabel("Nom : ");
-        nomField = new JTextField(20);
+		JPanel mainPanel = new JPanel(new GridBagLayout());
+		mainPanel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		this.contentPane.add(mainPanel, BorderLayout.CENTER);
 
-        JLabel prenomLabel = new JLabel("Prénom : ");
-        prenomField = new JTextField(20);
+		this.addLabelAndField(mainPanel, "Nom : ", this.nomField = new JTextField(20), 0);
+		this.addLabelAndField(mainPanel, "Prénom : ", this.prenomField = new JTextField(20), 1);
+		this.addLabelAndField(mainPanel, "Adresse 1 : ", this.adresse1Field = new JTextField(20), 2);
+		this.addLabelAndField(mainPanel, "Adresse 2 : ", this.adresse2Field = new JTextField(20), 3);
+		this.addLabelAndField(mainPanel, "Code postal : ", this.codePostalField = new JTextField(10), 4);
+		this.addLabelAndField(mainPanel, "Ville : ", this.villeField = new JTextField(20), 5);
+		this.addLabelAndField(mainPanel, "Téléphone : ", this.telephoneField = new JTextField(15), 6);
+		this.addLabelAndField(mainPanel, "Mail : ", this.mailField = new JTextField(20), 7);
 
-        JLabel adresse1Label = new JLabel("Adresse 1 : ");
-        adresse1Field = new JTextField(20);
+		JPanel paymentPanel = new JPanel(new GridBagLayout());
+		paymentPanel.setBorder(BorderFactory.createTitledBorder("Moyen de paiement"));
+		GridBagConstraints payeTaille = new GridBagConstraints();
+		payeTaille.insets = new Insets(5, 5, 5, 5);
+		payeTaille.gridwidth = 2;
+		payeTaille.gridx = 0;
+		payeTaille.gridy = 8;
+		mainPanel.add(paymentPanel, payeTaille);
 
-        JLabel adresse2Label = new JLabel("Adresse 2 : ");
-        adresse2Field = new JTextField(20);
+		this.paypalRadioButton = new JRadioButton("PayPal");
+		JLabel paypalLabel = this.createImageLabel("src\\main\\resources\\images\\Images paiements\\PP.png", 40);
+		this.addRadioButtonWithImage(paymentPanel, this.paypalRadioButton, paypalLabel, 0);
 
-        JLabel codePostalLabel = new JLabel("Code postal : ");
-        codePostalField = new JTextField(10);
+		this.creditCardRadioButton = new JRadioButton("Carte de crédit");
+		JLabel creditCardLabel = this.createImageLabel("src\\main\\resources\\images\\Images paiements\\CB.png", 30);
+		this.addRadioButtonWithImage(paymentPanel, this.creditCardRadioButton, creditCardLabel, 1);
 
-        JLabel villeLabel = new JLabel("Ville : ");
-        villeField = new JTextField(20);
+		this.chequeRadioButton = new JRadioButton("Paiement par chèque");
+		JLabel chequeLabel = this.createImageLabel("src\\main\\resources\\images\\Images paiements\\CQ.png", 40);
+		this.addRadioButtonWithImage(paymentPanel, this.chequeRadioButton, chequeLabel, 2);
 
-        JLabel telephoneLabel = new JLabel("Téléphone : ");
-        telephoneField = new JTextField(15);
+		JPanel newsletterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		newsletterPanel.setBorder(BorderFactory.createTitledBorder("Abonnement à notre Newsletter"));
+		this.ouiRadioButton = new JRadioButton("Oui");
+		this.nonRadioButton = new JRadioButton("Non");
+		ButtonGroup newsletterGroup = new ButtonGroup();
+		newsletterGroup.add(this.ouiRadioButton);
+		newsletterGroup.add(this.nonRadioButton);
+		newsletterPanel.add(this.ouiRadioButton);
+		newsletterPanel.add(this.nonRadioButton);
+		GridBagConstraints NewsTaille = new GridBagConstraints();
+		NewsTaille = new GridBagConstraints();
+		NewsTaille.insets = new Insets(5, 5, 5, 5);
+		NewsTaille.gridx = 0;
+		NewsTaille.gridy = 9;
+		NewsTaille.gridwidth = GridBagConstraints.REMAINDER;
+		NewsTaille.fill = GridBagConstraints.HORIZONTAL;
+		mainPanel.add(newsletterPanel, NewsTaille);
 
-        JLabel mailLabel = new JLabel("Mail : ");
-        mailField = new JTextField(20);
+		JPanel buttonPanel = new JPanel();
+		JButton validerButton = new JButton("Valider");
+		JButton annulerButton = new JButton("Annuler");
+		buttonPanel.add(validerButton);
+		buttonPanel.add(annulerButton);
+		GridBagConstraints FinTaille = new GridBagConstraints();
+		FinTaille = new GridBagConstraints();
+		FinTaille.insets = new Insets(5, 5, 5, 5);
+		FinTaille.gridx = 0;
+		FinTaille.gridy = 10;
+		FinTaille.gridwidth = 2;
+		mainPanel.add(buttonPanel, FinTaille);
 
-        // Payment options
-        JPanel paymentPanel = new JPanel(new GridLayout(3, 1));
-        paymentPanel.setBorder(BorderFactory.createTitledBorder("Moyen de paiement"));
+		validerButton.addActionListener(e -> {
+			String nom = this.nomField.getText();
+			String prenom = this.prenomField.getText();
+			String adresse1 = this.adresse1Field.getText();
+			String adresse2 = this.adresse2Field.getText();
+			String codePostal = this.codePostalField.getText();
+			String ville = this.villeField.getText();
+			String telephone = this.telephoneField.getText();
+			String mail = this.mailField.getText();
+			String modePaiement = "";
+			if (this.paypalRadioButton.isSelected()) {
+				modePaiement = "PayPal";
+			} else if (this.creditCardRadioButton.isSelected()) {
+				modePaiement = "Carte de crédit";
+			} else if (this.chequeRadioButton.isSelected()) {
+				modePaiement = "Paiement par chèque";
+			}
+			/*
+			 * System.out.println("Nom : " + nom); System.out.println("Prénom : " + prenom);
+			 * System.out.println("Adresse 1 : " + adresse1);
+			 * System.out.println("Adresse 2 : " + adresse2);
+			 * System.out.println("Code postal : " + codePostal);
+			 * System.out.println("Ville : " + ville); System.out.println("Téléphone : " +
+			 * telephone); System.out.println("Mail : " + mail);
+			 * System.out.println("Mode de paiement : " + modePaiement);
+			 */
 
-        // PayPal radio button with image
-        JPanel paypalPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        paypalRadioButton = new JRadioButton("PayPal");
-        JLabel paypalLabel = new JLabel();
+		});
 
-        // Load and resize the PayPal image
-        ImageIcon paypalIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\PP.png");
-        Image paypalImg = paypalIcon.getImage();
-        Image resizedPaypalImage = getScaledImage(paypalImg, 40);
-        paypalIcon = new ImageIcon(resizedPaypalImage);
-        paypalLabel.setIcon(paypalIcon);
+		annulerButton.addActionListener(e -> {
+			this.dispose();
+		});
+	}
 
-        paypalPanel.add(paypalRadioButton);
-        paypalPanel.add(paypalLabel);
-        paymentPanel.add(paypalPanel);
+	private void addLabelAndField(JPanel panel, String labelText, JTextField textField, int yPosition) {
+		GridBagConstraints PanTaille = new GridBagConstraints();
+		PanTaille.insets = new Insets(5, 5, 5, 5);
+		PanTaille.gridx = 0;
+		PanTaille.gridy = yPosition;
+		PanTaille.gridwidth = 1;
+		PanTaille.fill = GridBagConstraints.HORIZONTAL;
+		panel.add(new JLabel(labelText), PanTaille);
+		PanTaille.gridx = 1;
+		panel.add(textField, PanTaille);
+	}
 
-        // Credit card radio button with image
-        JPanel creditCardPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        creditCardRadioButton = new JRadioButton("Carte de crédit");
-        JLabel creditCardLabel = new JLabel();
+	private JLabel createImageLabel(String imagePath, int height) {
+		ImageIcon icon = new ImageIcon(imagePath);
+		Image img = icon.getImage();
+		Image scaledImg = this.getScaledImage(img, height);
+		return new JLabel(new ImageIcon(scaledImg));
+	}
 
-        // Load and resize the credit card image
-        ImageIcon creditCardIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\CB.png");
-        Image creditCardImg = creditCardIcon.getImage();
-        Image resizedCreditCardImage = getScaledImage(creditCardImg, 30);
-        creditCardIcon = new ImageIcon(resizedCreditCardImage);
-        creditCardLabel.setIcon(creditCardIcon);
+	private void addRadioButtonWithImage(JPanel panel, JRadioButton radioButton, JLabel label, int yPosition) {
+		GridBagConstraints PanTaille = new GridBagConstraints();
+		PanTaille.insets = new Insets(5, 5, 5, 5);
+		PanTaille.gridx = 0;
+		PanTaille.gridy = yPosition;
+		PanTaille.anchor = GridBagConstraints.WEST;
+		panel.add(radioButton, PanTaille);
+		PanTaille.gridx = 1;
+		panel.add(label, PanTaille);
 
-        creditCardPanel.add(creditCardRadioButton);
-        creditCardPanel.add(creditCardLabel);
-        paymentPanel.add(creditCardPanel);
+		radioButton.addActionListener(e -> {
+			if (radioButton.isSelected()) {
+				this.paypalRadioButton.setSelected(radioButton == this.paypalRadioButton);
+				this.creditCardRadioButton.setSelected(radioButton == this.creditCardRadioButton);
+				this.chequeRadioButton.setSelected(radioButton == this.chequeRadioButton);
+			}
+		});
+	}
 
-        // Cheque radio button with image
-        JPanel chequePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        chequeRadioButton = new JRadioButton("Paiement par chèque");
-        JLabel chequeLabel = new JLabel();
-
-        // Load and resize the cheque image
-        ImageIcon chequeIcon = new ImageIcon("C:\\Users\\Diego\\eclipse-workspace\\programmation_SAE_S2-01_GE_3\\src\\main\\resources\\images\\Images paiements\\CQ.png");
-        Image chequeImg = chequeIcon.getImage();
-        Image resizedChequeImage = getScaledImage(chequeImg, 40);
-        chequeIcon = new ImageIcon(resizedChequeImage);
-        chequeLabel.setIcon(chequeIcon);
-
-        chequePanel.add(chequeRadioButton);
-        chequePanel.add(chequeLabel);
-        paymentPanel.add(chequePanel);
-
-        // Newsletter subscription
-        JPanel newsletterPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        newsletterPanel.setBorder(BorderFactory.createTitledBorder("Abonnement à notre Newsletter"));
-        ouiRadioButton = new JRadioButton("Oui");
-        nonRadioButton = new JRadioButton("Non");
-        ButtonGroup newsletterGroup = new ButtonGroup();
-        newsletterGroup.add(ouiRadioButton);
-        newsletterGroup.add(nonRadioButton);
-        newsletterPanel.add(ouiRadioButton);
-        newsletterPanel.add(nonRadioButton);
-
-        // Buttons
-        JButton validerButton = new JButton("Valider");
-        JButton annulerButton = new JButton("Annuler");
-
-        // Layout settings
-        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(nomLabel)
-                    .addComponent(prenomLabel)
-                    .addComponent(adresse1Label)
-                    .addComponent(adresse2Label)
-                    .addComponent(codePostalLabel)
-                    .addComponent(villeLabel)
-                    .addComponent(telephoneLabel)
-                    .addComponent(mailLabel))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                    .addComponent(nomField)
-                    .addComponent(prenomField)
-                    .addComponent(adresse1Field)
-                    .addComponent(adresse2Field)
-                    .addComponent(codePostalField)
-                    .addComponent(villeField)
-                    .addComponent(telephoneField)
-                    .addComponent(mailField)))
-            .addComponent(paymentPanel)
-            .addComponent(newsletterPanel)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(validerButton)
-                .addComponent(annulerButton))
-        );
-
-        layout.setVerticalGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(nomLabel)
-                .addComponent(nomField))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(prenomLabel)
-                .addComponent(prenomField))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(adresse1Label)
-                .addComponent(adresse1Field))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(adresse2Label)
-                .addComponent(adresse2Field))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(codePostalLabel)
-                .addComponent(codePostalField))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(villeLabel)
-                .addComponent(villeField))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(telephoneLabel)
-                .addComponent(telephoneField))
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(mailLabel)
-                .addComponent(mailField))
-            .addComponent(paymentPanel)
-            .addComponent(newsletterPanel)
-            .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(validerButton)
-                .addComponent(annulerButton))
-        );
-    }
-
-    private Image getScaledImage(Image srcImg, int height) {
-        int width = (int) (height * ((double) srcImg.getWidth(null) / srcImg.getHeight(null)));
-        return srcImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
-    }
+	private Image getScaledImage(Image srcImg, int height) {
+		int width = (int) (height * ((double) srcImg.getWidth(null) / srcImg.getHeight(null)));
+		return srcImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
+	}
 }
