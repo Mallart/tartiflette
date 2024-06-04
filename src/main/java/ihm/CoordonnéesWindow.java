@@ -21,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
+import modele.Coordonnées;
+
 public class CoordonnéesWindow extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -123,15 +125,8 @@ public class CoordonnéesWindow extends JFrame {
 		mainPanel.add(buttonPanel, FinTaille);
 
 		validerButton.addActionListener(e -> {
-			String nom = this.nomField.getText();
-			String prenom = this.prenomField.getText();
-			String adresse1 = this.adresse1Field.getText();
-			String adresse2 = this.adresse2Field.getText();
-			String codePostal = this.codePostalField.getText();
-			String ville = this.villeField.getText();
-			String telephone = this.telephoneField.getText();
-			String mail = this.mailField.getText();
 			String modePaiement = "";
+			boolean abbNewsletter = false;
 			if (this.paypalRadioButton.isSelected()) {
 				modePaiement = "PayPal";
 			} else if (this.creditCardRadioButton.isSelected()) {
@@ -139,6 +134,18 @@ public class CoordonnéesWindow extends JFrame {
 			} else if (this.chequeRadioButton.isSelected()) {
 				modePaiement = "Paiement par chèque";
 			}
+			
+			if (ouiRadioButton.isSelected()) {
+				abbNewsletter = true;
+			}
+			
+			Coordonnées coordonnées = new Coordonnées(
+					nomField.getText(), prenomField.getText(), adresse1Field.getText(),adresse2Field.getText(),
+					codePostalField.getText(), villeField.getText(),
+					telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
+			
+
+
 			/*
 			 * System.out.println("Nom : " + nom); System.out.println("Prénom : " + prenom);
 			 * System.out.println("Adresse 1 : " + adresse1);
