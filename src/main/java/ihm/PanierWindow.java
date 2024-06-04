@@ -18,6 +18,7 @@ import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 import modele.Article;
 import modele.Fromage;
+import modele.Panier;
 
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -52,11 +53,11 @@ public class PanierWindow extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(List<Article> articles) {
+	public static void main(Panier panier) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					PanierWindow frame = new PanierWindow(articles);
+					PanierWindow frame = new PanierWindow(panier);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -68,7 +69,7 @@ public class PanierWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PanierWindow(List<Article> articles) {
+	public PanierWindow(Panier panier) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -174,15 +175,16 @@ public class PanierWindow extends JFrame {
 		cmb_transporter.setSelectedIndex(0);
 		
 		panel_actions.add(btn_continueShopping);
-		FillTable(articles, (DefaultTableModel)products.getModel());
+		FillTable(panier, (DefaultTableModel)products.getModel());
 	}
 	
-	private void FillTable(List<Article> articles, DefaultTableModel dtm)
+	private void FillTable(Panier panier, DefaultTableModel dtm)
 	{
 		while(dtm.getColumnCount() > 0)
 			dtm.removeRow(0);
-		for(Article article : articles)
+		for(int i = 0; i < panier.getTaillePanier(); i++)
 		{
+			Article article = panier.getArticle(i);
 			String poids = "jsp frr kg";
 			dtm.addRow(new Object[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), poids, article.getPrixTTC() });
 		}

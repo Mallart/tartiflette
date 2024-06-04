@@ -37,6 +37,11 @@ public class NosFromages extends JFrame {
 		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex), panier).setVisible(true);
 	}
 	
+	private void showBasket(Panier panier)
+	{
+		new PanierWindow(panier).setVisible(true);
+	}
+	
 	
 	public static void main(Fromages fromages) {
 		EventQueue.invokeLater(new Runnable() {
@@ -73,6 +78,7 @@ public class NosFromages extends JFrame {
 		JButton Panier = new JButton("Votre Panier");
 		Panier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				showBasket(panier);
 				System.out.println("button clicked");
 			}
 		});
