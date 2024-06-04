@@ -40,7 +40,7 @@ public class FromageDescription extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(Fromage fromage) {
+	public static void main(SaisieFromage fromage, Panier panier) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -52,25 +52,30 @@ public class FromageDescription extends JFrame {
 			}
 		});
 	}
+	
+	public static String getImagePath(Fromage fromage)
+	{
+		return System.getProperty("user.dir") + "\\src\\main\\resources\\images\\fromages\\hauteur200\\"+ fromage.getNomImage() + ".jpg";
+	}
 
 	/**
 	 * Create the frame.
 	 */
-	public FromageDescription(Fromage fromage) {
+	public FromageDescription(SaisieFromage fromage) {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 684, 406);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		ImageIcon fromageIcon = new ImageIcon(System.getProperty("user.dir") + "\\src\\main\\resources\\images\\fromages\\hauteur200\\"+ fromage.getNomImage() + ".jpg");
+		ImageIcon fromageIcon = new ImageIcon(this.getImagePath(fromage.builderFromage()));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel leftPanel = new JPanel();
 		leftPanel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		contentPane.add(leftPanel, BorderLayout.WEST);
 		leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
-		JLabel nomFromage = new JLabel(fromage.getDésignation());
+		JLabel nomFromage = new JLabel(fromage.builderFromage().getDésignation());
 		nomFromage.setFont(new Font("Stencil", Font.PLAIN, 24));
 		
 		JLabel fromageImage = new JLabel(fromageIcon);
@@ -95,11 +100,19 @@ public class FromageDescription extends JFrame {
 		description.setLineWrap(true);
 		
 		description.setForeground(new Color(0,0,0));
-		description.setText(fromage.getDescription());
+		description.setText(fromage.builderFromage().getDescription());
 		rightPanel.add(description);
 		
 		JPanel bottomPanel = new JPanel();
 		contentPane.add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.setLayout(new BorderLayout(0, 0));
+		
+		JSplitPane splitPane = new JSplitPane();
+		splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+		bottomPanel.add(splitPane, BorderLayout.NORTH);
+		
+		JSplitPane splitPane_1 = new JSplitPane();
+		bottomPanel.add(splitPane_1, BorderLayout.SOUTH);
 	}
 
 }
