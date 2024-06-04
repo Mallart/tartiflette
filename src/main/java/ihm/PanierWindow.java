@@ -192,8 +192,7 @@ public class PanierWindow extends JFrame {
 		for(int i = 0; i < panier.getTaillePanier(); i++)
 		{
 			Article article = panier.getArticle(i);
-			String poids = "jsp frr kg";
-			dtm.addRow(new Object[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), poids, article.getPrixTTC() });
+			dtm.addRow(new Object[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé(), article.getPrixTTC() });
 		}
 	}
 
