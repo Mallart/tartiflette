@@ -31,6 +31,8 @@ import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PanierWindow extends JFrame {
 
@@ -165,6 +167,11 @@ public class PanierWindow extends JFrame {
 		panel_actions.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JButton btn_validateBasket = new JButton("Valider le panier");
+		btn_validateBasket.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new CoordonnéesWindow();
+			}
+		});
 		panel_actions.add(btn_validateBasket);
 		
 		JButton btn_emptyBasket = new JButton("Vider le panier");

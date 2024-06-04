@@ -1,4 +1,4 @@
-package src.main.java.ihm;
+package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
