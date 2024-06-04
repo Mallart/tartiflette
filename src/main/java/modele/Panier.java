@@ -26,9 +26,16 @@ public class Panier {
 	}
 	
 	public float totalPanier(float fraisDePort) {
-		return totalSansFraisDePort() + fraisDePort;
+		if (totalSansFraisDePort() >= 120) {
+			return totalSansFraisDePort();
+		}else {
+			return totalSansFraisDePort() + fraisDePort;
+		}
+		
 	}
 	
-	
+	public void viderPanier() {
+		articlePanier.clear();
+	}
 	
 }
