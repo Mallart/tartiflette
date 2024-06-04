@@ -26,7 +26,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 
-public class Panier extends JFrame {
+public class PanierWindow extends JFrame {
 
 	private JPanel contentPane;
 	private JTable products;
@@ -47,7 +47,7 @@ public class Panier extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Panier frame = new Panier();
+					PanierWindow frame = new PanierWindow();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,7 +59,7 @@ public class Panier extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Panier() {
+	public PanierWindow() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
