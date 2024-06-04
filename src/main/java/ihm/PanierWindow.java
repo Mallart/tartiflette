@@ -170,10 +170,10 @@ public class PanierWindow extends JFrame {
 		panel_actions.add(btn_emptyBasket);
 		
 		JButton btn_continueShopping = new JButton("Continuer les achats");
-		panel_actions.add(btn_continueShopping);
-		cmb_transporter.setModel(new DefaultComboBoxModel<String>() {{for(String transporter : transporters) addElement(transporter);}});
-		
+		cmb_transporter.setModel(new DefaultComboBoxModel<String>() {{for(String transporter : transporters) addElement(transporter);}});		
 		cmb_transporter.setSelectedIndex(0);
+		
+		panel_actions.add(btn_continueShopping);
 		FillTable(articles, (DefaultTableModel)products.getModel());
 	}
 	

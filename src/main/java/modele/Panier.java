@@ -15,7 +15,8 @@ public class Panier {
 	
 	public void ajouterArticlePanier(Article article, int quantite) {
 		if((article.getQuantitéEnStock() - quantite)>0) {
-			articlePanier.add(article);
+			for(int i = 0; i < quantite; i++)
+				articlePanier.add(article);
 			article.setQuantitéEnStock(article.getQuantitéEnStock() - quantite);
 		}
 	}
@@ -43,6 +44,11 @@ public class Panier {
 	public Article getArticle(int index)
 	{
 		return articlePanier.get(index);
+	}
+	
+	public int getTaillePanier()
+	{
+		return articlePanier.size();
 	}
 	
 }
