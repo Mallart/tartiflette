@@ -21,6 +21,9 @@ public class Panier {
 		return article.getPrixTTC();
 	}
 	
+	public void ajouterArticlePanier(Article article) {
+		articlePanier.add(article);
+	}
 	
 	
 	
