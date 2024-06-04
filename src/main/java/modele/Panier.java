@@ -13,8 +13,11 @@ public class Panier {
 		return article.getQuantitéEnStock() * article.getPrixTTC();
 	}
 	
-	public void ajouterArticlePanier(Article article) {
-		articlePanier.add(article);
+	public void ajouterArticlePanier(Article article, int quantite) {
+		if((article.getQuantitéEnStock() - quantite)>0) {
+			articlePanier.add(article);
+			article.setQuantitéEnStock(article.getQuantitéEnStock() - quantite);
+		}
 	}
 	
 	public float totalSansFraisDePort() {
@@ -31,7 +34,6 @@ public class Panier {
 		}else {
 			return totalSansFraisDePort() + fraisDePort;
 		}
-		
 	}
 	
 	public void viderPanier() {
