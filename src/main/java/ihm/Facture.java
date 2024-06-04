@@ -73,14 +73,14 @@ public class Facture extends JFrame {
 
 		String nom = coordonnées.getNom();
 		String prenom = coordonnées.getPrenom();
-		//TODO changer pour les éléménts suivant----------->
-		String adresse = new String("tripomme");
-		String numero = new String("0674958127");
-		String mèl = new String("Jacob.bob@gmail.com");
+		String adresse = coordonnées.getAdresse1();
+		
+		String numero = coordonnées.getTelephone();
+		String mail = coordonnées.getMail();
 
 		String prodnom = new String("fromage");
 		Object[][] data = { { prodnom, 10.0, 2, 24.0 }, { "Produit B", 15.5, 3, 55.65 }, { "Produit C", 7.2, 1, 8.64 },
-				{ "Produit D", 20.0, 5, 120.0 } };
+				{ "Produit D", 20.0, 5, 120.0 }};
 
 		JPanel panel_5 = new JPanel();
 		this.contentPane.add(panel_5, BorderLayout.CENTER);
@@ -127,7 +127,7 @@ public class Facture extends JFrame {
 		JList list = new JList();
 		list.setBackground(new Color(240, 240, 240));
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { " ", nom + " " + prenom, adresse, numero, mèl };
+			String[] values = new String[] { " ", nom + " " + prenom, adresse, numero, mail };
 
 			@Override
 			public int getSize() {
