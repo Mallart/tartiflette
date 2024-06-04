@@ -1,5 +1,4 @@
 package ihm;
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -31,10 +30,11 @@ public class NosFromages extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtNomDuFromage;
 	private Fromages listFromages;
+	private Panier panier;
 	
 	private void showCheese(int cheeseIndex)
 	{
-		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex)).setVisible(true);
+		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex), panier).setVisible(true);
 	}
 	
 	
@@ -57,6 +57,7 @@ public class NosFromages extends JFrame {
 	 * Create the frame.
 	 */
 	public NosFromages(Fromages listFromages) {
+		this.panier = new Panier();
 		this.listFromages = listFromages;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
