@@ -3,23 +3,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Panier {
-	private List<Fromages> fromagePanier;
+	private List<Article> articlePanier;
 
 	public Panier() {
-		this.fromagePanier = new ArrayList<Fromages>();
+		this.articlePanier = new ArrayList<Article>();
 	}
 	
-	public void ajouterFromagePanier(Fromages fromage) {
-		fromagePanier.add(fromage);
+	public float prixTotalArticle(Article artcile) {
+		return artcile.getQuantitéEnStock() * artcile.getPrixTTC();
 	}
 	
-	public Fromages getFromageDePanier(int i){
-		return fromagePanier[i];
+	public int quantiteArticle(Article article) {
+		return article.getQuantitéEnStock();
 	}
 	
-	public void viderPanier() {
-		fromagePanier.clear();
+	public float prixArticle(Article article) {
+		return article.getPrixTTC();
 	}
+	
+	
+	
 	
 	
 }
