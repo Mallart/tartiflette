@@ -40,4 +40,9 @@ public class Panier {
 		articlePanier.clear();
 	}
 	
+	public Article getArticle(int index)
+	{
+		return articlePanier.get(index);
+	}
+	
 }
