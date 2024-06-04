@@ -25,8 +25,6 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
-import net.miginfocom.swing.MigLayout;
-
 public class Imprimer extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -131,14 +129,11 @@ public class Imprimer extends JFrame {
 		JPanel panel_2 = new JPanel();
 		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		this.contentPane.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new MigLayout("", "[grow]", "[grow][grow]"));
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_2.add(panel_4, "cell 0 0,grow");
-		panel_4.setLayout(
-				new MigLayout("", "[grow][128.00,grow][358.00,grow,leading][grow]", "[grow][grow][grow][grow]"));
-
+		
 		JLabel lblNewLabel_2 = new JLabel("Nom :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_2, "cell 0 0,alignx center");
@@ -179,7 +174,7 @@ public class Imprimer extends JFrame {
 		panel_6.setToolTipText("");
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(panel_6);
-		panel_6.setLayout(new MigLayout("", "[][][][grow]", "[grow][grow]"));
+
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
 		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
@@ -211,7 +206,6 @@ public class Imprimer extends JFrame {
 		panel_5.setAlignmentX(Component.LEFT_ALIGNMENT);
 		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(panel_5);
-		panel_5.setLayout(new MigLayout("", "[grow][grow]", "[grow][grow]"));
 
 		JLabel lblNewLabel_7 = new JLabel("Nombres de copies :");
 		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 14));

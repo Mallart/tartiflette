@@ -23,11 +23,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modele.Coordonnées;
+
 public class Facture extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private static Coordonnées coordonnées;
 
 	/**
 	 * Launch the application.
@@ -37,7 +40,7 @@ public class Facture extends JFrame {
 			@Override
 			public void run() {
 				try {
-					Facture frame = new Facture();
+					Facture frame = new Facture(coordonnées);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +52,8 @@ public class Facture extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Facture() {
+	public Facture(Coordonnées coordonnées) {
+		Facture.coordonnées = coordonnées;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();
@@ -67,8 +71,9 @@ public class Facture extends JFrame {
 		// date en string
 		String dateString = dateFormat.format(date);
 
-		String nom = new String("jacob");
-		String prenom = new String("bob");
+		String nom = coordonnées.getNom();
+		String prenom = coordonnées.getPrenom();
+		//TODO changer pour les éléménts suivant----------->
 		String adresse = new String("tripomme");
 		String numero = new String("0674958127");
 		String mèl = new String("Jacob.bob@gmail.com");

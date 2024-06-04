@@ -14,7 +14,6 @@ public class Coordonnées {
 	
 	public Coordonnées(String nom, String prenom, String adresse1, String adresse2, String codePostal, String ville,
 			String telephone, String mail,String moyenDePaiment, boolean abonnement) {
-
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse1 = adresse1;

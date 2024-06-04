@@ -143,18 +143,9 @@ public class CoordonnéesWindow extends JFrame {
 					nomField.getText(), prenomField.getText(), adresse1Field.getText(),adresse2Field.getText(),
 					codePostalField.getText(), villeField.getText(),
 					telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
+		
 			
-
-
-			/*
-			 * System.out.println("Nom : " + nom); System.out.println("Prénom : " + prenom);
-			 * System.out.println("Adresse 1 : " + adresse1);
-			 * System.out.println("Adresse 2 : " + adresse2);
-			 * System.out.println("Code postal : " + codePostal);
-			 * System.out.println("Ville : " + ville); System.out.println("Téléphone : " +
-			 * telephone); System.out.println("Mail : " + mail);
-			 * System.out.println("Mode de paiement : " + modePaiement);
-			 */
+			new Facture(coordonnées).setVisible(true);
 
 		});
 
