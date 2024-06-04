@@ -43,7 +43,7 @@ public class CoordonnéesWindow extends JFrame {
 	}
 
 	public CoordonnéesWindow() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setBounds(100, 100, 800, 600);
 		this.contentPane = new JPanel(new BorderLayout());
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

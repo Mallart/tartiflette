@@ -169,7 +169,7 @@ public class PanierWindow extends JFrame {
 		JButton btn_validateBasket = new JButton("Valider le panier");
 		btn_validateBasket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new CoordonnéesWindow();
+				new CoordonnéesWindow().setVisible(true);
 			}
 		});
 		panel_actions.add(btn_validateBasket);
