@@ -79,7 +79,6 @@ public class NosFromages extends JFrame {
 		Panier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				showBasket(panier);
-				System.out.println("button clicked");
 			}
 		});
 		panel.setLayout(new BorderLayout(0, 0));
