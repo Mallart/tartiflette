@@ -1,1 +1,11 @@
+!*.java
+!*.jpg
+*.prefs
+*.class
+*.xml
+.classpath
+.project
+*.jar
+*.properties
+*.MF
 /bin/

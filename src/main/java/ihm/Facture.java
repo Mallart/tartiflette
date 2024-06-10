@@ -2,7 +2,6 @@ package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -14,7 +13,6 @@ import java.util.Locale;
 import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -25,11 +23,14 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modele.Coordonnées;
+
 public class Facture extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private static Coordonnées coordonnées;
 
 	/**
 	 * Launch the application.
@@ -39,6 +40,8 @@ public class Facture extends JFrame {
 			@Override
 			public void run() {
 				try {
+					Facture frame = new Facture(coordonnées);
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,7 +52,8 @@ public class Facture extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Facture(String nom, String prenom, String adresse1, String adresse2, String telephone, String mail) {
+	public Facture(Coordonnées coordonnées) {
+		Facture.coordonnées = coordonnées;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();
@@ -67,9 +71,16 @@ public class Facture extends JFrame {
 		// date en string
 		String dateString = dateFormat.format(date);
 
+		String nom = coordonnées.getNom();
+		String prenom = coordonnées.getPrenom();
+		String adresse = coordonnées.getAdresse1();
+		
+		String numero = coordonnées.getTelephone();
+		String mail = coordonnées.getMail();
+
 		String prodnom = new String("fromage");
 		Object[][] data = { { prodnom, 10.0, 2, 24.0 }, { "Produit B", 15.5, 3, 55.65 }, { "Produit C", 7.2, 1, 8.64 },
-				{ "Produit D", 20.0, 5, 120.0 } };
+				{ "Produit D", 20.0, 5, 120.0 }};
 
 		JPanel panel_5 = new JPanel();
 		this.contentPane.add(panel_5, BorderLayout.CENTER);
@@ -116,7 +127,7 @@ public class Facture extends JFrame {
 		JList list = new JList();
 		list.setBackground(new Color(240, 240, 240));
 		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { " ", nom + " " + prenom, adresse1 + " " + adresse2, telephone, mail };
+			String[] values = new String[] { " ", nom + " " + prenom, adresse, numero, mail };
 
 			@Override
 			public int getSize() {
@@ -214,27 +225,6 @@ public class Facture extends JFrame {
 		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		panel_7.add(lblNewLabel_3, BorderLayout.CENTER);
-
-		JPanel panel_12 = new JPanel();
-		this.contentPane.add(panel_12, BorderLayout.SOUTH);
-		panel_12.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_13 = new JPanel();
-		panel_12.add(panel_13, BorderLayout.EAST);
-
-		JButton btnNewButton_1 = new JButton("Imprimer");
-		btnNewButton_1.addActionListener(e -> {
-			new Imprimer().setVisible(true);
-		});
-		panel_13.add(btnNewButton_1);
-		btnNewButton_1.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
-		JButton btnNewButton = new JButton("Quitter");
-		btnNewButton.addActionListener(e -> {
-			this.dispose();
-		});
-		panel_13.add(btnNewButton);
-		btnNewButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 	}
 

@@ -134,19 +134,18 @@ public class CoordonnéesWindow extends JFrame {
 			} else if (this.chequeRadioButton.isSelected()) {
 				modePaiement = "Paiement par chèque";
 			}
-
-			if (this.ouiRadioButton.isSelected()) {
+			
+			if (ouiRadioButton.isSelected()) {
 				abbNewsletter = true;
 			}
-
-			Coordonnées coordonnées = new Coordonnées(this.nomField.getText(), this.prenomField.getText(),
-					this.adresse1Field.getText(), this.adresse2Field.getText(), this.codePostalField.getText(),
-					this.villeField.getText(), this.telephoneField.getText(), this.mailField.getText(), modePaiement,
-					abbNewsletter);
-
-			new Facture(this.nomField.getText(), this.prenomField.getText(), this.adresse1Field.getText(),
-					this.adresse2Field.getText(), this.telephoneField.getText(), this.mailField.getText())
-					.setVisible(true);
+			
+			Coordonnées coordonnées = new Coordonnées(
+					nomField.getText(), prenomField.getText(), adresse1Field.getText(),adresse2Field.getText(),
+					codePostalField.getText(), villeField.getText(),
+					telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
+		
+			
+			new Facture(coordonnées).setVisible(true);
 
 		});
 
