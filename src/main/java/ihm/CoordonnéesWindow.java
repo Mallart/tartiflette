@@ -1,4 +1,4 @@
-package ihm;
+package src.main.java.ihm;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

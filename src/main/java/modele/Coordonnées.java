@@ -1,4 +1,4 @@
-package modele;
+package src.main.java.modele;
 
 public class Coordonnées {
 	private String nom;
