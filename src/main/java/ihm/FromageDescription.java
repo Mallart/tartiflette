@@ -78,7 +78,7 @@ public class FromageDescription extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-		ImageIcon fromageIcon = new ImageIcon(this.getImagePath(fromage));
+		ImageIcon fromageIcon = new ImageIcon(FromageDescription.getImagePath(fromage));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JPanel leftPanel = new JPanel();
@@ -143,7 +143,7 @@ public class FromageDescription extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				ajouterArticlePanier(panier, fromage.getArticles().get(cmb_selectPrice.getSelectedIndex()), (int)spn_quantity.getValue());
-				hide();
+				dispose();
 			}
 		});
 		addCancel.add(btn_addBasket);
@@ -152,7 +152,7 @@ public class FromageDescription extends JFrame {
 		btn_cancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
-				hide();
+				dispose();
 			}
 		});
 		addCancel.add(btn_cancel);
@@ -162,15 +162,12 @@ public class FromageDescription extends JFrame {
 	private void ajouterArticlePanier(Panier panier, Article article, int quantity)
 	{
 		panier.ajouterArticlePanier(article, quantity);
-		System.out.println("...");
-		for(int i = 0; i < panier.getTaillePanier(); i++)
-			System.out.println("Ajouté: " + panier.getArticle(i));
 	}
 	
 	private void updateMaxQuantity(JSpinner spn_quantity, Fromage fromage, int articleIndex)
 	{
 		// Rafraîchit le nombre maxiumum de fromages sélectionnables pour cet article
-		spn_quantity.setModel(new SpinnerNumberModel(0, 0, fromage.getArticles().get(articleIndex).getQuantitéEnStock(), 1));
+		spn_quantity.setModel(new SpinnerNumberModel(0, 0, fromage.getArticles().get(articleIndex).getQuantitéEnStock() - 1, 1));
 	}
 
 

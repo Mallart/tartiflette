@@ -1,20 +1,48 @@
 package modele;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Panier {
 	private List<Article> articlePanier;
 
 	public Panier() {
-		this.articlePanier = new ArrayList<Article>();
+		this.articlePanier = new LinkedList<Article>();
 	}
 	
 	public float prixTotalPanier()
 	{
 		float sum = 0.f;
-		for(Article article : articlePanier)
+		for(Article article : this.articlePanier)
 			sum += article.getPrixTTC();
 		return sum;
+	}
+	
+	public int nombreOccurencesArticle(Article article)
+	{
+		int occurences = 0;
+		for(Article _article : this.articlePanier)
+			if(article.equals(_article))
+				occurences++;
+		return occurences;
+	}
+	
+	public static int nombreOccurencesArticle(List<Article> panier, Article article)
+	{
+		int occurences = 0;
+		for(Article _article : panier)
+			if(article.equals(_article))
+				occurences++;
+		return occurences;
+	}
+	
+	public List<Article> getPanierSansDoublon()
+	{
+		List<Article> panier = new LinkedList<Article>();
+		for(Article _article : this.articlePanier)
+			if(Panier.nombreOccurencesArticle(panier, _article) == 0)
+				panier.add(_article);
+		return panier;
 	}
 	
 	public float prixTotalArticle(Article article) {

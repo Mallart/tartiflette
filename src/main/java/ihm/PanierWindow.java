@@ -26,6 +26,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.ComboBoxModel;
@@ -43,15 +45,8 @@ public class PanierWindow extends JFrame {
 	private JTextField price_transportFees;
 	private JTextField price_total;
 	
-	private String[] columnsName = { "Icône", "Nom", "Poids", "Prix à l'unité"};
-	private DefaultTableModel productsTableModel;
-	
-	private List<String> transporters = new ArrayList<String>(){{
-		add("FedEx");
-		add("Colissimo");
-		add("La Poste");
-		add("Papi");
-	}};
+	private static final String[] columnsName = { "Icône", "Nom", "Poids", "Prix à l'unité", "Quantité" };
+	private Map<String, Float> transporters;
 
 	/**
 	 * Launch the application.
@@ -73,6 +68,13 @@ public class PanierWindow extends JFrame {
 	 * Create the frame.
 	 */
 	public PanierWindow(Panier panier) {
+		transporters = new HashMap<String, Float>(){{
+			put("FedEx", 47.f);
+			put("Colissimo", 11.f);
+			put("La Poste", 10.5f);
+			put("Papi", 0.10f);
+		}};
+		
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -122,6 +124,14 @@ public class PanierWindow extends JFrame {
 		panel_transport.add(img_transporterLogo, BorderLayout.WEST);
 		
 		JComboBox cmb_transporter = new JComboBox();
+		cmb_transporter.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				float transport = transporters.get(cmb_transporter.getSelectedItem());
+				price_transportFees.setText(String.valueOf(transport));
+				price_total.setText(String.valueOf(transport + panier.prixTotalPanier()));
+			}
+		});
 		panel_transport.add(cmb_transporter, BorderLayout.EAST);
 		
 		JPanel panel_totals_prices = new JPanel();
@@ -178,14 +188,35 @@ public class PanierWindow extends JFrame {
 		panel_actions.add(btn_validateBasket);
 		
 		JButton btn_emptyBasket = new JButton("Vider le panier");
+		btn_emptyBasket.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e)
+			{
+				EmptyBasket(panier);
+			}
+		});
 		panel_actions.add(btn_emptyBasket);
 		
 		JButton btn_continueShopping = new JButton("Continuer les achats");
-		cmb_transporter.setModel(new DefaultComboBoxModel<String>() {{for(String transporter : transporters) addElement(transporter);}});		
+		btn_continueShopping.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				dispose();
+			}
+		});
+		cmb_transporter.setModel(new DefaultComboBoxModel<String>() {{for(String transporter : transporters.keySet()) addElement(transporter);}});		
 		cmb_transporter.setSelectedIndex(0);
 		
 		panel_actions.add(btn_continueShopping);
 		FillTable(panier);
+	}
+	
+	private void EmptyBasket(Panier panier)
+	{
+		// Reremplir les stocks avant de vider le panier pour éviter les fuites de fromage
+		for(Article article : panier.getPanierSansDoublon())
+			article.setQuantitéEnStock(article.getQuantitéEnStock() + panier.nombreOccurencesArticle(article));
+		panier.viderPanier();
+		this.FillTable(panier);
 	}
 	
 	private void FillTable(Panier panier)
@@ -195,13 +226,14 @@ public class PanierWindow extends JFrame {
 			@Override
 			public boolean isCellEditable(int row, int column)
 			{
+				if(column == columnsName.length - 1)
+					return true;
 				return false;
 			}
 		};
-		for(int i = 0; i < panier.getTaillePanier(); i++)
+		for(Article article : panier.getPanierSansDoublon())
 		{
-			Article article = panier.getArticle(i);
-			dtm.addRow(new String[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé(),  ((Float)article.getPrixTTC()).toString() });
+			dtm.addRow(new String[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé().isEmpty() ? "Prix à l'unité" : article.getClé(), ((Float)article.getPrixTTC()).toString(), ((Integer)panier.nombreOccurencesArticle(article)).toString() });
 		}
 		products.setModel((TableModel)dtm);
 	}
