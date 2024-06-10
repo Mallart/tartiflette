@@ -1,4 +1,6 @@
-package modele;
+package tests;
+
+import modele.Panier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

@@ -1,12 +1,11 @@
-package modele;
+package tests;
+import modele.Coordonnées;
 
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import src.main.java.modele.Coordonnées;
 
 public class TestCoordonnées {
 

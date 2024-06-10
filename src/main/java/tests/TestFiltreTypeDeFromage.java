@@ -1,4 +1,8 @@
-package modele;
+package tests;
+import modele.Fromages;
+import modele.GenerationFromages;
+import modele.TypeLait;
+import modele.Fromage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

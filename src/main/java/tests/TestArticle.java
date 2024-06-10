@@ -1,4 +1,5 @@
-package modele;
+package tests;
+import modele.Article;
 
 import static org.junit.Assert.fail;
 

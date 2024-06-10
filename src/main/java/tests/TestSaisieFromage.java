@@ -1,5 +1,12 @@
-package modele;
-
+package tests;
+import modele.SaisieFromage;
+import modele.TypeVente;
+import modele.Fromage;
+import modele.FromageALUnité;
+import modele.FromageALUnitéPlusieursChoix;
+import modele.FromageEntierOuMoitié;
+import modele.FromagePourXPersonnes;
+import modele.FromageALaCoupe;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
