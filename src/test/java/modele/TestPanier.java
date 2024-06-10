@@ -12,6 +12,8 @@ import org.junit.Test;
 public class TestPanier 
 {
 	private Panier panier;
+	
+	
 	@Before
 	public void setUp()
 	{
@@ -33,6 +35,7 @@ public class TestPanier
 	@Test
 	public void ajoutPanier()
 	{
-		assertEquals(panier.getTaillePanier(), 1);
+		panier.ajouterArticlePanier(new Article(), 2);
+		assertEquals(panier.getTaillePanier(), 2);
 	}
 }

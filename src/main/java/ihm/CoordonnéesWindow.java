@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import modele.Coordonnées;
+import modele.Panier;
 
 public class CoordonnéesWindow extends JFrame {
 
@@ -34,7 +35,7 @@ public class CoordonnéesWindow extends JFrame {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
 			try {
-				CoordonnéesWindow frame = new CoordonnéesWindow();
+				CoordonnéesWindow frame = new CoordonnéesWindow(new Panier());
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -42,7 +43,7 @@ public class CoordonnéesWindow extends JFrame {
 		});
 	}
 
-	public CoordonnéesWindow() {
+	public CoordonnéesWindow(Panier panier) {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setBounds(100, 100, 800, 600);
 		this.contentPane = new JPanel(new BorderLayout());
@@ -145,7 +146,7 @@ public class CoordonnéesWindow extends JFrame {
 					telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
 		
 			
-			new Facture(coordonnées).setVisible(true);
+			new Facture(coordonnées, panier).setVisible(true);
 
 		});
 

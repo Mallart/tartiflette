@@ -24,6 +24,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import modele.Coordonnées;
+import modele.Panier;
 
 public class Facture extends JFrame {
 
@@ -52,7 +53,7 @@ public class Facture extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Facture(Coordonnées coordonnées) {
+	public Facture(Coordonnées coordonnées, Panier panier) {
 		Facture.coordonnées = coordonnées;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
