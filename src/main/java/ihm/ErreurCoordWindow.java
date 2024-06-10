@@ -50,7 +50,7 @@ public class ErreurCoordWindow extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
-		ImageIcon image = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\images\\autreImage\\warning.png");
+		ImageIcon image = new ImageIcon(System.getProperty("user.dir") +"\\src\\main\\resources\\images\\autreImages\\warning.png");
 		
 		JLabel lblNewLabel_1 = new JLabel("Veuillez saisir tous les champs obligatoire");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 21));
