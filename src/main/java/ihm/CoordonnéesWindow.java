@@ -50,10 +50,6 @@ public class CoordonnéesWindow extends JFrame {
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
 
-		this.initComponents();
-	}
-
-	private void initComponents() {
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel titleLabel = new JLabel("Vos coordonnées");
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 24)); // Set the font size and style
