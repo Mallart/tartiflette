@@ -3,7 +3,6 @@
 *.prefs
 *.class
 *.xml
-.classpath
 .project
 *.jar
 *.properties
