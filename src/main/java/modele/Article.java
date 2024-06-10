@@ -37,24 +37,20 @@ public class Article {
 	@Override
 	public String toString() {
 		if (this.clé.equals("")) {
-			return this.fromage.getDésignation() + ", Prix TTC : "
-			        + this.getPrixTTC() + " €";
+			return this.fromage.getDésignation() + ", Prix TTC : " + this.getPrixTTC() + " €";
 		} else {
-			return this.fromage.getDésignation() + ", " + this.clé
-			        + ", Prix TTC : " + this.getPrixTTC() + " €";
+			return this.fromage.getDésignation() + ", " + this.clé + ", Prix TTC : " + this.getPrixTTC() + " €";
 		}
 	}
 
 	public String toStringAvecStock() {
-		return this.toString() + ", Quantité en stock : "
-		        + this.quantitéEnStock;
+		return this.toString() + ", Quantité en stock : " + this.quantitéEnStock;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		Article other = (Article) obj;
-		return (this.fromage.equals(other.fromage)
-		        && this.clé.equals(other.clé));
+		return (this.fromage.equals(other.fromage) && this.clé.equals(other.clé));
 	}
 
 }

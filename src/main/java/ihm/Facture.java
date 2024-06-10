@@ -1,4 +1,4 @@
-package src.main.java.ihm;
+package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -75,13 +75,13 @@ public class Facture extends JFrame {
 		String nom = coordonnées.getNom();
 		String prenom = coordonnées.getPrenom();
 		String adresse = coordonnées.getAdresse1();
-		
+
 		String numero = coordonnées.getTelephone();
 		String mail = coordonnées.getMail();
 
 		String prodnom = new String("fromage");
 		Object[][] data = { { prodnom, 10.0, 2, 24.0 }, { "Produit B", 15.5, 3, 55.65 }, { "Produit C", 7.2, 1, 8.64 },
-				{ "Produit D", 20.0, 5, 120.0 }};
+				{ "Produit D", 20.0, 5, 120.0 } };
 
 		JPanel panel_5 = new JPanel();
 		this.contentPane.add(panel_5, BorderLayout.CENTER);

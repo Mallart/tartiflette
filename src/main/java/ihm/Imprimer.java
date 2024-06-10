@@ -1,4 +1,4 @@
-package src.main.java.ihm;
+package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -133,7 +133,7 @@ public class Imprimer extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_2.add(panel_4, "cell 0 0,grow");
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Nom :");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_4.add(lblNewLabel_2, "cell 0 0,alignx center");
@@ -174,7 +174,6 @@ public class Imprimer extends JFrame {
 		panel_6.setToolTipText("");
 		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(panel_6);
-
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("New radio button");
 		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));

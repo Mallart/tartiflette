@@ -1,4 +1,4 @@
-package src.main.java.ihm;
+package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -135,17 +135,16 @@ public class CoordonnéesWindow extends JFrame {
 			} else if (this.chequeRadioButton.isSelected()) {
 				modePaiement = "Paiement par chèque";
 			}
-			
-			if (ouiRadioButton.isSelected()) {
+
+			if (this.ouiRadioButton.isSelected()) {
 				abbNewsletter = true;
 			}
-			
-			Coordonnées coordonnées = new Coordonnées(
-					nomField.getText(), prenomField.getText(), adresse1Field.getText(),adresse2Field.getText(),
-					codePostalField.getText(), villeField.getText(),
-					telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
-		
-			
+
+			Coordonnées coordonnées = new Coordonnées(this.nomField.getText(), this.prenomField.getText(),
+					this.adresse1Field.getText(), this.adresse2Field.getText(), this.codePostalField.getText(),
+					this.villeField.getText(), this.telephoneField.getText(), this.mailField.getText(), modePaiement,
+					abbNewsletter);
+
 			new Facture(coordonnées, panier).setVisible(true);
 
 		});
