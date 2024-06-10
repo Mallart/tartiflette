@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Panier {
+	public static final float PRIX_OFFRE_LIVRAISON = 120.f;
 	private List<Article> articlePanier;
 
 	public Panier() {
@@ -60,16 +61,17 @@ public class Panier {
 	public float totalSansFraisDePort() {
 		float sommes = 0;
 		for(Article art: articlePanier) {
-			return sommes += art.getPrixTTC();		
+			sommes += art.getPrixTTC();	
 		}
 		return sommes;
 	}
 	
 	public float totalPanier(float fraisDePort) {
-		if (totalSansFraisDePort() >= 120) {
-			return totalSansFraisDePort();
-		}else {
-			return totalSansFraisDePort() + fraisDePort;
+		float prix = totalSansFraisDePort();
+		if (prix >= PRIX_OFFRE_LIVRAISON) {
+			return prix;
+		} else {
+			return prix + fraisDePort;
 		}
 	}
 	

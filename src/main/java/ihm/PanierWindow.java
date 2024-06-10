@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -36,6 +37,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.ScrollPaneConstants;
 
 public class PanierWindow extends JFrame {
 
@@ -101,6 +103,8 @@ public class PanierWindow extends JFrame {
 		JButton btn_recalc_Basket = new JButton("Recalculer le panier");
 		splitPane_2.setRightComponent(btn_recalc_Basket);
 		
+		
+		
 		products = new JTable();
 		products.setRowSelectionAllowed(false);
 		
@@ -127,9 +131,9 @@ public class PanierWindow extends JFrame {
 		cmb_transporter.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)
 			{
+				// Actualise la valeur des frais de transport
 				float transport = transporters.get(cmb_transporter.getSelectedItem());
-				price_transportFees.setText(String.valueOf(transport));
-				price_total.setText(String.valueOf(transport + panier.prixTotalPanier()));
+				RefreshPrices(panier, transport, price_exVAT, price_transportFees, price_total);
 			}
 		});
 		panel_transport.add(cmb_transporter, BorderLayout.EAST);
@@ -164,13 +168,13 @@ public class PanierWindow extends JFrame {
 		price_exVAT.setColumns(10);
 		
 		price_transportFees = new JTextField();
-		price_transportFees.setText(((Float)prixLivraison).toString());
+		price_transportFees.setText((panier.prixTotalPanier() >= 120.f ? (Float)0.f : (Float)prixLivraison).toString());
 		price_transportFees.setEditable(false);
 		panel_prices.add(price_transportFees);
 		price_transportFees.setColumns(10);
 		
 		price_total = new JTextField();
-		price_total.setText(((Float)(panier.prixTotalPanier() + prixLivraison)).toString());
+		price_total.setText(((Float)(panier.totalPanier(prixLivraison))).toString());
 		price_total.setEditable(false);
 		panel_prices.add(price_total);
 		price_total.setColumns(10);
@@ -192,6 +196,7 @@ public class PanierWindow extends JFrame {
 			public void actionPerformed(ActionEvent e)
 			{
 				EmptyBasket(panier);
+				RefreshPrices(panier, prixLivraison, price_exVAT, price_transportFees, price_total);
 			}
 		});
 		panel_actions.add(btn_emptyBasket);
@@ -219,6 +224,13 @@ public class PanierWindow extends JFrame {
 		this.FillTable(panier);
 	}
 	
+	private void RefreshPrices(Panier panier, float tfees, JTextField price, JTextField transportfees, JTextField total)
+	{
+		price.setText(String.valueOf(panier.prixTotalPanier()));
+		transportfees.setText(panier.prixTotalPanier() >= Panier.PRIX_OFFRE_LIVRAISON ? "0" : String.valueOf(tfees));
+		total.setText(String.valueOf(panier.totalPanier(tfees)));
+	}
+	
 	private void FillTable(Panier panier)
 	{
 		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0)
@@ -231,10 +243,10 @@ public class PanierWindow extends JFrame {
 				return false;
 			}
 		};
+		// Indications sur les colonnes du panier
+		dtm.addRow(new String[] { "Icône", "Nom fromage", "Type de facturation", "Prix", "Quantité" });
 		for(Article article : panier.getPanierSansDoublon())
-		{
 			dtm.addRow(new String[] { article.getFromage().getNomImage(), article.getFromage().getDésignation(), article.getClé().isEmpty() ? "Prix à l'unité" : article.getClé(), ((Float)article.getPrixTTC()).toString(), ((Integer)panier.nombreOccurencesArticle(article)).toString() });
-		}
 		products.setModel((TableModel)dtm);
 	}
 
