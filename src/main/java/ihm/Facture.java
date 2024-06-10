@@ -203,6 +203,17 @@ public class Facture extends JFrame {
 		JLabel lblNewLabel_7_2 = new JLabel(" €");
 		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_9.add(lblNewLabel_7_2);
+		
+		JPanel panel_13 = new JPanel();
+		panel_9.add(panel_13);
+		
+		JButton btnNewButton_1 = new JButton("Imprimer");
+		btnNewButton_1.setAlignmentX(1.0f);
+		panel_13.add(btnNewButton_1);
+		
+		JButton btnNewButton = new JButton("Quitter");
+		btnNewButton.setAlignmentX(1.0f);
+		panel_13.add(btnNewButton);
 
 		JPanel panel_7 = new JPanel();
 		this.contentPane.add(panel_7, BorderLayout.NORTH);
@@ -221,23 +232,6 @@ public class Facture extends JFrame {
 		JPanel panel_12 = new JPanel();
 		this.contentPane.add(panel_12, BorderLayout.SOUTH);
 		panel_12.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_13 = new JPanel();
-		panel_12.add(panel_13, BorderLayout.EAST);
-
-		JButton btnNewButton_1 = new JButton("Imprimer");
-		btnNewButton_1.addActionListener(e -> {
-			new Imprimer().setVisible(true);
-		});
-		panel_13.add(btnNewButton_1);
-		btnNewButton_1.setAlignmentX(Component.RIGHT_ALIGNMENT);
-
-		JButton btnNewButton = new JButton("Quitter");
-		btnNewButton.addActionListener(e -> {
-			this.dispose();
-		});
-		panel_13.add(btnNewButton);
-		btnNewButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 	}
 }
