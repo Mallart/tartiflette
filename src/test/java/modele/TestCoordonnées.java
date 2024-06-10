@@ -2,8 +2,11 @@ package modele;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import src.main.java.modele.Coordonnées;
 
 public class TestCoordonnées {
 
@@ -13,6 +16,11 @@ public class TestCoordonnées {
 	public void setUp() throws Exception {
 		this.CoordonnéesExemple = new Coordonnées("Dupont", "Jean", "9 rue des lauriers", "6 rue caussade", "31000",
 				"Toulouse", "0602068913", "jean.dupont@gmail.fr", "Paypal", false);
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		this.CoordonnéesExemple = null;
 	}
 
 	@Test
