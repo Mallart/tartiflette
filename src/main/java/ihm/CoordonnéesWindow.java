@@ -1,6 +1,7 @@
 package ihm;
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -31,11 +32,13 @@ public class CoordonnéesWindow extends JFrame {
 	private JTextField nomField, prenomField, adresse1Field, adresse2Field, codePostalField, villeField, telephoneField,
 			mailField;
 	private JRadioButton paypalRadioButton, creditCardRadioButton, chequeRadioButton, ouiRadioButton, nonRadioButton;
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
+	private Panier panier;
+	
+	
+	public static void main(Panier _panier) {
+		EventQueue.invokeLater(() -> {
 			try {
-				CoordonnéesWindow frame = new CoordonnéesWindow(new Panier());
+				CoordonnéesWindow frame = new CoordonnéesWindow(_panier);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -43,12 +46,13 @@ public class CoordonnéesWindow extends JFrame {
 		});
 	}
 
-	public CoordonnéesWindow(Panier panier) {
+	public CoordonnéesWindow(Panier _panier) {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setBounds(100, 100, 800, 600);
 		this.contentPane = new JPanel(new BorderLayout());
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
+		this.panier = _panier;
 
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel titleLabel = new JLabel("Vos coordonnées");
@@ -146,7 +150,7 @@ public class CoordonnéesWindow extends JFrame {
 		});
 
 		annulerButton.addActionListener(e -> {
-			this.hide();
+			this.dispose();
 		});
 	}
 

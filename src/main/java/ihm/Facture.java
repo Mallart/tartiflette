@@ -31,30 +31,20 @@ public class Facture extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
-	private static Coordonnées coordonnées;
+	private Coordonnées coordonnées;
+	private Panier panier;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					Facture frame = new Facture(coordonnées);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public Facture(Coordonnées coordonnées, Panier panier) {
-		Facture.coordonnées = coordonnées;
+	
+	public Facture(Coordonnées _coordonnées, Panier _panier) {
+		panier = _panier;
+		coordonnées = _coordonnées;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();

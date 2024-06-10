@@ -31,6 +31,7 @@ public class PanierWindow extends JFrame {
 	private JTextField price_exVAT;
 	private JTextField price_transportFees;
 	private JTextField price_total;
+	private Panier panier;
 
 	private static final String[] columnsName = { "Icône", "Nom", "Poids", "Prix à l'unité", "Quantité" };
 	private Map<String, Float> transporters;
@@ -38,12 +39,12 @@ public class PanierWindow extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(Panier panier) {
+	public static void main(Panier _panier) {
 		EventQueue.invokeLater(new Runnable() {
 			@Override
 			public void run() {
 				try {
-					PanierWindow frame = new PanierWindow(panier);
+					PanierWindow frame = new PanierWindow(_panier);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,7 @@ public class PanierWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public PanierWindow(Panier panier) {
+	public PanierWindow(Panier _panier) {
 		this.transporters = new HashMap<String, Float>() {
 			{
 				put("FedEx", 47.f);
@@ -64,7 +65,7 @@ public class PanierWindow extends JFrame {
 				put("Papi", 0.10f);
 			}
 		};
-
+		this.panier = _panier;
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
