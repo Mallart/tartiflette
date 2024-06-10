@@ -124,30 +124,8 @@ public class CoordonnéesWindow extends JFrame {
 		FinTaille.gridy = 10;
 		FinTaille.gridwidth = 2;
 		mainPanel.add(buttonPanel, FinTaille);
-
-		validerButton.addActionListener(e -> {
-			String modePaiement = "";
-			boolean abbNewsletter = false;
-			if (this.paypalRadioButton.isSelected()) {
-				modePaiement = "PayPal";
-			} else if (this.creditCardRadioButton.isSelected()) {
-				modePaiement = "Carte de crédit";
-			} else if (this.chequeRadioButton.isSelected()) {
-				modePaiement = "Paiement par chèque";
-			}
-
-			if (this.ouiRadioButton.isSelected()) {
-				abbNewsletter = true;
-			}
-
-			Coordonnées coordonnées = new Coordonnées(this.nomField.getText(), this.prenomField.getText(),
-					this.adresse1Field.getText(), this.adresse2Field.getText(), this.codePostalField.getText(),
-					this.villeField.getText(), this.telephoneField.getText(), this.mailField.getText(), modePaiement,
-					abbNewsletter);
-
-			new Facture(coordonnées, panier).setVisible(true);
-
-		});
+		
+		fillField(validerButton);
 
 		annulerButton.addActionListener(e -> {
 			this.dispose();
@@ -196,4 +174,42 @@ public class CoordonnéesWindow extends JFrame {
 		int width = (int) (height * ((double) srcImg.getWidth(null) / srcImg.getHeight(null)));
 		return srcImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 	}
+	
+	private void fillField(JButton validerButton) {
+		validerButton.addActionListener(e -> {
+			if ((!paypalRadioButton.isSelected() && !creditCardRadioButton.isSelected() && !creditCardRadioButton.isSelected())
+				|| (nomField.getText() == "" && prenomField.getText() == "" && adresse1Field.getText() == "" && villeField.getText() == "" &&
+				codePostalField.getText() == "" && villeField.getText() ==  "" && mailField.getText() == "" && telephoneField.getText()=="")) 
+			{
+				System.out.println("Erreur dans la selection des champs");
+			}else {
+				
+				String modePaiement = "";
+				boolean abbNewsletter = false;
+				if (this.paypalRadioButton.isSelected()) {
+					modePaiement = "PayPal";
+				} else if (this.creditCardRadioButton.isSelected()) {
+					modePaiement = "Carte de crédit";
+				} else if (this.chequeRadioButton.isSelected()) {
+					modePaiement = "Paiement par chèque";
+				}
+				
+				if (ouiRadioButton.isSelected()) {
+					abbNewsletter = true;
+				}
+				
+				Coordonnées coordonnées = new Coordonnées(
+						nomField.getText(), prenomField.getText(), adresse1Field.getText(),adresse2Field.getText(),
+						codePostalField.getText(), villeField.getText(),
+						telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
+				
+				new Facture(coordonnées,panier).setVisible(true);
+				
+			}
+		});
+			
+			
+			
+	}
 }
+
