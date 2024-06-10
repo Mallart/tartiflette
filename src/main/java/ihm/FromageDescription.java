@@ -156,7 +156,7 @@ public class FromageDescription extends JFrame {
 	private void updateMaxQuantity(JSpinner spn_quantity, Fromage fromage, int articleIndex) {
 		// Rafraîchit le nombre maxiumum de fromages sélectionnables pour cet article
 		spn_quantity.setModel(
-				new SpinnerNumberModel(0, 0, fromage.getArticles().get(articleIndex).getQuantitéEnStock() - 1, 1));
+				new SpinnerNumberModel(0, 0, fromage.getArticles().get(articleIndex).getQuantitéEnStock(), 1));
 	}
 
 }
