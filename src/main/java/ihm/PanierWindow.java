@@ -1,5 +1,4 @@
-package ihm;
-
+package src.main.java.ihm;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
