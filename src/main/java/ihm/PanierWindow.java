@@ -211,6 +211,7 @@ public class PanierWindow extends JFrame {
 		cmb_transporter.setSelectedIndex(0);
 		
 		panel_actions.add(btn_continueShopping);
+		RefreshPrices(panier, prixLivraison, price_exVAT, price_transportFees, price_total);
 		FillTable(panier);
 	}
 	
@@ -226,7 +227,7 @@ public class PanierWindow extends JFrame {
 	private void RefreshPrices(Panier panier, float tfees, JTextField price, JTextField transportfees, JTextField total)
 	{
 		price.setText(String.valueOf(panier.prixTotalPanier()));
-		transportfees.setText(panier.prixTotalPanier() >= Panier.PRIX_OFFRE_LIVRAISON ? "0" : String.valueOf(tfees));
+		transportfees.setText(panier.prixTotalPanier() >= Panier.PRIX_OFFRE_LIVRAISON || panier.getTaillePanier() == 0 ? "0" : String.valueOf(tfees));
 		total.setText(String.valueOf(panier.totalPanier(tfees)));
 	}
 	
