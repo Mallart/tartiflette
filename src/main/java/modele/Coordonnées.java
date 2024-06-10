@@ -50,6 +50,10 @@ public class Coordonnées {
 	public String getMail() {
 		return mail;
 	}
+	
+	public String getMoyenDePaiement() {
+		return moyenDePaiment;
+	}
 	public boolean isAbonnement() {
 		return abonnement;
 	}
