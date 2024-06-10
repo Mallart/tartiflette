@@ -2,8 +2,8 @@ package ihm;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -13,6 +13,7 @@ import java.util.Locale;
 import javax.swing.AbstractListModel;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -41,10 +42,10 @@ public class Facture extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	
+
 	public Facture(Coordonnées _coordonnées, Panier _panier) {
-		panier = _panier;
-		coordonnées = _coordonnées;
+		this.panier = _panier;
+		this.coordonnées = _coordonnées;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();
@@ -62,12 +63,12 @@ public class Facture extends JFrame {
 		// date en string
 		String dateString = dateFormat.format(date);
 
-		String nom = coordonnées.getNom();
-		String prenom = coordonnées.getPrenom();
-		String adresse = coordonnées.getAdresse1();
+		String nom = this.coordonnées.getNom();
+		String prenom = this.coordonnées.getPrenom();
+		String adresse = this.coordonnées.getAdresse1();
 
-		String numero = coordonnées.getTelephone();
-		String mail = coordonnées.getMail();
+		String numero = this.coordonnées.getTelephone();
+		String mail = this.coordonnées.getMail();
 
 		String prodnom = new String("fromage");
 		Object[][] data = { { prodnom, 10.0, 2, 24.0 }, { "Produit B", 15.5, 3, 55.65 }, { "Produit C", 7.2, 1, 8.64 },
@@ -217,6 +218,26 @@ public class Facture extends JFrame {
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 32));
 		panel_7.add(lblNewLabel_3, BorderLayout.CENTER);
 
-	}
+		JPanel panel_12 = new JPanel();
+		this.contentPane.add(panel_12, BorderLayout.SOUTH);
+		panel_12.setLayout(new BorderLayout(0, 0));
 
+		JPanel panel_13 = new JPanel();
+		panel_12.add(panel_13, BorderLayout.EAST);
+
+		JButton btnNewButton_1 = new JButton("Imprimer");
+		btnNewButton_1.addActionListener(e -> {
+			new Imprimer().setVisible(true);
+		});
+		panel_13.add(btnNewButton_1);
+		btnNewButton_1.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+		JButton btnNewButton = new JButton("Quitter");
+		btnNewButton.addActionListener(e -> {
+			this.dispose();
+		});
+		panel_13.add(btnNewButton);
+		btnNewButton.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+	}
 }
