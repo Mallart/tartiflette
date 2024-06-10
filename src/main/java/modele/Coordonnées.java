@@ -11,9 +11,9 @@ public class Coordonnées {
 	private String mail;
 	private String moyenDePaiment;
 	private boolean abonnement;
-	
+
 	public Coordonnées(String nom, String prenom, String adresse1, String adresse2, String codePostal, String ville,
-			String telephone, String mail,String moyenDePaiment, boolean abonnement) {
+			String telephone, String mail, String moyenDePaiment, boolean abonnement) {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.adresse1 = adresse1;
@@ -25,40 +25,45 @@ public class Coordonnées {
 		this.moyenDePaiment = moyenDePaiment;
 		this.abonnement = abonnement;
 	}
-	
+
 	public String getNom() {
-		return nom;
+		return this.nom;
 	}
+
 	public String getPrenom() {
-		return prenom;
+		return this.prenom;
 	}
+
 	public String getAdresse1() {
-		return adresse1;
+		return this.adresse1;
 	}
+
 	public String getAdresse2() {
-		return adresse2;
+		return this.adresse2;
 	}
+
 	public String getCodePostal() {
-		return codePostal;
+		return this.codePostal;
 	}
+
 	public String getVille() {
-		return ville;
+		return this.ville;
 	}
+
 	public String getTelephone() {
-		return telephone;
+		return this.telephone;
 	}
+
 	public String getMail() {
-		return mail;
+		return this.mail;
 	}
-	
+
 	public String getMoyenDePaiement() {
-		return moyenDePaiment;
+		return this.moyenDePaiment;
 	}
+
 	public boolean isAbonnement() {
-		return abonnement;
+		return this.abonnement;
 	}
-	
-	
-	
-	
+
 }
