@@ -64,13 +64,10 @@ public class NosFromages extends JFrame {
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		System.out.println("------------------------------------------------");
 		setContentPane(this.contentPane);
 		this.contentPane.setLayout(new BorderLayout(0, 0));
-		System.out.println("------------------------------------------------");
 		JPanel panel = new JPanel();
 		this.contentPane.add(panel, BorderLayout.NORTH);
-		System.out.println("------------------------------------------------");
 		JButton Panier = new JButton("Votre Panier");
 		Panier.addActionListener(new ActionListener() {
 			@Override
@@ -79,16 +76,13 @@ public class NosFromages extends JFrame {
 			}
 		});
 		panel.setLayout(new BorderLayout(0, 0));
-		System.out.println("------------------------------------------------");
 		JLabel titre = new JLabel("NOS FROMAGES");
 		titre.setFont(new Font("Tahoma", Font.PLAIN, 24));
 		panel.add(titre, BorderLayout.WEST);
 		panel.add(Panier, BorderLayout.EAST);
-		System.out.println("------------------------------------------------");
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		System.out.println("------------------------------------------------");
 		this.txtNomDuFromage = new JTextField();
 		this.txtNomDuFromage.setText("Nom du fromage");
 		this.txtNomDuFromage.setToolTipText("NomFromgage");

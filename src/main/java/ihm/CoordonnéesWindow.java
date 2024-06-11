@@ -181,7 +181,7 @@ public class CoordonnéesWindow extends JFrame {
 				|| (nomField.getText() == "" && prenomField.getText() == "" && adresse1Field.getText() == "" && villeField.getText() == "" &&
 				codePostalField.getText() == "" && villeField.getText() ==  "" && mailField.getText() == "" && telephoneField.getText()=="")) 
 			{
-				System.out.println("Erreur dans la selection des champs");
+				new ErreurCoordWindow().setVisible(true);
 			}else {
 				
 				String modePaiement = "";

@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import modele.Article;
 import modele.Coordonnées;
 import modele.Panier;
 
@@ -34,6 +35,7 @@ public class Facture extends JFrame {
 	private JTable table;
 	private Coordonnées coordonnées;
 	private Panier panier;
+	private static final String[] columnsName = { "Nom", "Poids", "Prix à l'unité", "Quantité", "Total" };
 
 	/**
 	 * Launch the application.
@@ -232,6 +234,38 @@ public class Facture extends JFrame {
 		JPanel panel_12 = new JPanel();
 		this.contentPane.add(panel_12, BorderLayout.SOUTH);
 		panel_12.setLayout(new BorderLayout(0, 0));
-
+		FillTable(panier);
 	}
+	
+	private void FillTable(Panier panier) {
+		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0) {
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				if (column == columnsName.length - 1) {
+					return true;
+				}
+				return false;
+			}
+		};
+		for (Article article : panier.getPanierSansDoublon()) {
+			float totalArt = article.getPrixTTC()*(panier.nombreOccurencesArticle(article));
+			dtm.addRow(new String[] {article.getFromage().getDésignation(),
+					article.getClé().isEmpty() ? "Prix à l'unité" : article.getClé(),
+					((Float) article.getPrixTTC()).toString(),
+					((Integer) panier.nombreOccurencesArticle(article)).toString(),
+					((Float)totalArt).toString()});
+		}
+		this.table.setModel(dtm);
+	}
+	//TODO correct coordonné cheque don't work
+	// display price and ship cost in facture
+	// make a default value for ship cost
+	
+	
+	
+	
+	
+	
+	
+	
 }
