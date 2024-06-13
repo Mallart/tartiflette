@@ -27,6 +27,8 @@ import javax.swing.table.DefaultTableModel;
 import modele.Article;
 import modele.Coordonnées;
 import modele.Panier;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Facture extends JFrame {
 
@@ -211,6 +213,10 @@ public class Facture extends JFrame {
 		panel_9.add(panel_13);
 		
 		JButton btnNewButton_1 = new JButton("Imprimer");
+		btnNewButton_1.addActionListener(e ->{
+			this.dispose();
+			new Imprimer().setVisible(true);
+		});
 		btnNewButton_1.setAlignmentX(1.0f);
 		panel_13.add(btnNewButton_1);
 		
