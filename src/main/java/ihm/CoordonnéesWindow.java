@@ -33,12 +33,13 @@ public class CoordonnéesWindow extends JFrame {
 			mailField;
 	private JRadioButton paypalRadioButton, creditCardRadioButton, chequeRadioButton, ouiRadioButton, nonRadioButton;
 	private Panier panier;
+	private float shippingCost;
 	
 	
-	public static void main(Panier _panier) {
+	public static void main(Panier _panier, float shippingCost) {
 		EventQueue.invokeLater(() -> {
 			try {
-				CoordonnéesWindow frame = new CoordonnéesWindow(_panier);
+				CoordonnéesWindow frame = new CoordonnéesWindow(_panier,shippingCost);
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -46,13 +47,14 @@ public class CoordonnéesWindow extends JFrame {
 		});
 	}
 
-	public CoordonnéesWindow(Panier _panier) {
+	public CoordonnéesWindow(Panier _panier, float shippingCost) {
 		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setBounds(100, 100, 800, 600);
 		this.contentPane = new JPanel(new BorderLayout());
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
 		this.panier = _panier;
+		this.shippingCost = shippingCost;
 
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel titleLabel = new JLabel("Vos coordonnées");
@@ -177,7 +179,7 @@ public class CoordonnéesWindow extends JFrame {
 	
 	private void fillField(JButton validerButton) {
 		validerButton.addActionListener(e -> {
-			if ((!paypalRadioButton.isSelected() && !creditCardRadioButton.isSelected() && !creditCardRadioButton.isSelected())
+			if ((!paypalRadioButton.isSelected() && !creditCardRadioButton.isSelected() && !chequeRadioButton.isSelected())
 				|| (nomField.getText() == "" && prenomField.getText() == "" && adresse1Field.getText() == "" && villeField.getText() == "" &&
 				codePostalField.getText() == "" && villeField.getText() ==  "" && mailField.getText() == "" && telephoneField.getText()=="")) 
 			{
@@ -203,7 +205,8 @@ public class CoordonnéesWindow extends JFrame {
 						codePostalField.getText(), villeField.getText(),
 						telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
 				
-				new Facture(coordonnées,panier).setVisible(true);
+				new Facture(coordonnées,panier, shippingCost).setVisible(true);
+				this.dispose();
 				
 			}
 		});

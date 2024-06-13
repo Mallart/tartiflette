@@ -114,7 +114,9 @@ public class PanierWindow extends JFrame {
 		JLabel img_transporterLogo = new JLabel("transporter.jpg");
 		panel_transport.add(img_transporterLogo, BorderLayout.WEST);
 
-		JComboBox cmb_transporter = new JComboBox();
+		JComboBox<String> cmb_transporter = new JComboBox<String>();
+		
+		
 		cmb_transporter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -176,7 +178,7 @@ public class PanierWindow extends JFrame {
 		btn_validateBasket.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new CoordonnéesWindow(panier).setVisible(true);
+				new CoordonnéesWindow(panier,PanierWindow.this.transporters.get(cmb_transporter.getSelectedItem())).setVisible(true);
 			}
 		});
 		panel_actions.add(btn_validateBasket);

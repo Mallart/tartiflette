@@ -36,7 +36,8 @@ public class Facture extends JFrame {
 	private Coordonnées coordonnées;
 	private Panier panier;
 	private static final String[] columnsName = { "Nom", "Poids", "Prix à l'unité", "Quantité", "Total" };
-
+	private float shippingCost;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -45,9 +46,10 @@ public class Facture extends JFrame {
 	 * Create the frame.
 	 */
 
-	public Facture(Coordonnées _coordonnées, Panier _panier) {
+	public Facture(Coordonnées _coordonnées, Panier _panier, float shippingCost) {
 		this.panier = _panier;
 		this.coordonnées = _coordonnées;
+		this.shippingCost = shippingCost;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();
@@ -154,8 +156,8 @@ public class Facture extends JFrame {
 
 		JLabel lblNewLabel_4 = new JLabel("FRAIS DE TRANSPORT : ");
 		panel_10.add(lblNewLabel_4);
-
-		String livraisonPrix = new String("138");
+		String livraisonPrix = new String((panier.prixTotalPanier() >= 120.f ? (Float) 0.f : (Float) shippingCost).toString());
+		System.out.println(livraisonPrix);
 		JLabel prixlivraison = new JLabel("New label");
 		panel_10.add(prixlivraison);
 		prixlivraison.setText(livraisonPrix);
@@ -177,16 +179,15 @@ public class Facture extends JFrame {
 
 		JLabel prixttccommande = new JLabel("New label");
 		panel_11.add(prixttccommande);
-		String prixcommande = new String("10");
+		String prixcommande = new String(((Float) panier.prixTotalPanier()).toString());
 		prixttccommande.setText(prixcommande);
 
-		JLabel lblNewLabel_7 = new JLabel(" €, paiment par ");
+		JLabel lblNewLabel_7 = new JLabel(" €");
 		panel_11.add(lblNewLabel_7);
 
-		String typedepaiment = new String("cheque");
 		JLabel typeDePaiment = new JLabel("New label");
 		panel_11.add(typeDePaiment);
-		typeDePaiment.setText(typedepaiment);
+
 
 		JPanel panel_9 = new JPanel();
 		panel_8.add(panel_9, BorderLayout.SOUTH);
@@ -196,7 +197,7 @@ public class Facture extends JFrame {
 		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_9.add(lblNewLabel_6);
 
-		String prixTotal = new String("148");
+		String prixTotal = new String(((Float) (panier.totalPanier(shippingCost))).toString());
 		JLabel prixtotal = new JLabel("New label");
 		prixtotal.setFont(new Font("Tahoma", Font.BOLD, 11));
 		panel_9.add(prixtotal);
@@ -234,10 +235,11 @@ public class Facture extends JFrame {
 		JPanel panel_12 = new JPanel();
 		this.contentPane.add(panel_12, BorderLayout.SOUTH);
 		panel_12.setLayout(new BorderLayout(0, 0));
-		FillTable(panier);
+		fillTable(panier);
+		
 	}
 	
-	private void FillTable(Panier panier) {
+	private void fillTable(Panier panier) {
 		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
@@ -256,16 +258,6 @@ public class Facture extends JFrame {
 					((Float)totalArt).toString()});
 		}
 		this.table.setModel(dtm);
-	}
-	//TODO correct coordonné cheque don't work
-	// display price and ship cost in facture
-	// make a default value for ship cost
-	
-	
-	
-	
-	
-	
-	
+	}	
 	
 }
