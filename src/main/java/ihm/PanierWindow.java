@@ -178,7 +178,7 @@ public class PanierWindow extends JFrame {
 		btn_validateBasket.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new CoordonnéesWindow(panier,PanierWindow.this.transporters.get(cmb_transporter.getSelectedItem())).setVisible(true);
+				new CoordonnéesWindow(panier,panier.prixTotalPanier() >= 120 ? 0.f :PanierWindow.this.transporters.get(cmb_transporter.getSelectedItem())).setVisible(true);
 			}
 		});
 		panel_actions.add(btn_validateBasket);

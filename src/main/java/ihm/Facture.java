@@ -159,15 +159,16 @@ public class Facture extends JFrame {
 		JLabel lblNewLabel_4 = new JLabel("FRAIS DE TRANSPORT : ");
 		panel_10.add(lblNewLabel_4);
 		String livraisonPrix = new String((panier.prixTotalPanier() >= 120.f ? (Float) 0.f : (Float) shippingCost).toString());
-		System.out.println(livraisonPrix);
 		JLabel prixlivraison = new JLabel("New label");
 		panel_10.add(prixlivraison);
 		prixlivraison.setText(livraisonPrix);
 
-		JLabel lblNewLabel_7_1 = new JLabel(" €, livraison par ");
+		JLabel lblNewLabel_7_1 = new JLabel(" €, ");
 		panel_10.add(lblNewLabel_7_1);
-
-		String livreur = new String("chronopost");
+		
+		System.out.println(shippingCost);
+		String livreur = changeNameShippingCompany(shippingCost);
+		
 		JLabel typedelivraison = new JLabel("New label");
 		panel_10.add(typedelivraison);
 		typedelivraison.setText(livreur);
@@ -243,6 +244,22 @@ public class Facture extends JFrame {
 		panel_12.setLayout(new BorderLayout(0, 0));
 		fillTable(panier);
 		
+	}
+
+	private String changeNameShippingCompany(float shippingCost) {
+		String livreur;
+		if (shippingCost == 47.f){
+			livreur = new String("livraison par FedEx");
+		}else if(shippingCost == 11.f){
+			livreur = new String("livraison par Colissimo");
+		}else if(shippingCost == 10.5f){
+			livreur = new String("livraison par La Poste");
+		}else if(shippingCost == 0.10f){
+			livreur = new String("livraison de Papi");
+		}else{
+			livreur = new String("livraison offerte"); 
+		}
+		return livreur;
 	}
 	
 	private void fillTable(Panier panier) {
