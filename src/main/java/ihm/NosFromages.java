@@ -34,6 +34,16 @@ public class NosFromages extends JFrame {
 	private void showCheese(int cheeseIndex) {
 		new FromageDescription(this.listFromages.getFromages().get(cheeseIndex), this.panier).setVisible(true);
 	}
+	
+	private int getFromageIndexByName(String fn) {
+		for(int i = 0; i < this.listFromages.getFromages().size(); i++)
+		{
+			Fromage f = this.listFromages.getFromages().get(i);
+			if (f.getDésignation() == fn)
+				return i;
+		}
+		return -1;
+	}
 
 	private void showBasket(Panier panier) {
 		new PanierWindow(panier).setVisible(true);
@@ -131,7 +141,7 @@ public class NosFromages extends JFrame {
 		fromageJlist.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
-				showCheese(fromageJlist.getSelectedIndex());
+				showCheese(getFromageIndexByName(fromageJlist.getSelectedValue()));
 			}
 		});
 	}

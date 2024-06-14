@@ -56,6 +56,7 @@ public class PanierWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("serial")
 	public PanierWindow(Panier _panier) {
 		this.transporters = new HashMap<String, Float>() {
 			{
@@ -234,6 +235,7 @@ public class PanierWindow extends JFrame {
 		total.setText(String.valueOf(panier.totalPanier(tfees)));
 	}
 
+	@SuppressWarnings("serial")
 	private void FillTable(Panier panier) {
 		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0) {
 			@Override
