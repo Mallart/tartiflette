@@ -223,6 +223,11 @@ public class Facture extends JFrame {
 		panel_13.add(btnNewButton_1);
 		
 		JButton btnNewButton = new JButton("Quitter");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnNewButton.setAlignmentX(1.0f);
 		panel_13.add(btnNewButton);
 
@@ -254,15 +259,7 @@ public class Facture extends JFrame {
 	}
 	
 	private void fillTable(Panier panier) {
-		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0) {
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				if (column == columnsName.length - 1) {
-					return true;
-				}
-				return false;
-			}
-		};
+		DefaultTableModel dtm = new DefaultTableModel(columnsName,0) {};
 		for (Article article : panier.getPanierSansDoublon()) {
 			float totalArt = article.getPrixTTC()*(panier.nombreOccurencesArticle(article));
 			dtm.addRow(new String[] {article.getFromage().getDésignation(),
