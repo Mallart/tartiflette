@@ -3,6 +3,7 @@ package ihm;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -13,19 +14,18 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.AbstractListModel;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
@@ -80,16 +80,6 @@ public class Imprimer extends JFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
 		panel.add(btnNewButton);
 
-		JButton btnNewButton_1 = new JButton("   Mise en page   ");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_1.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		panel.add(btnNewButton_1);
-
-		JButton btnNewButton_2 = new JButton("   Apparence   ");
-		btnNewButton_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton_2.setBorder(new LineBorder(new Color(0, 0, 0), 2, true));
-		panel.add(btnNewButton_2);
-
 		JPanel panel_1 = new JPanel();
 		this.contentPane.add(panel_1, BorderLayout.SOUTH);
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -136,60 +126,71 @@ public class Imprimer extends JFrame {
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_2.add(panel_4, BorderLayout.NORTH);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panel_11 = new JPanel();
-		panel_4.add(panel_11, BorderLayout.WEST);
-		panel_11.setLayout(new BorderLayout(0, 0));
+		JPanel panel_7 = new JPanel();
+		panel_4.add(panel_7);
+		panel_7.setLayout(new GridLayout(0, 3, 0, 0));
 
-		JList list = new JList();
-		list.setBackground(new Color(240, 240, 240));
-		list.setModel(new AbstractListModel() {
-			String[] values = new String[] { "Nom : ", "", "", "", "", "", "Statut :", "", "", "", "", "Type :", "", "",
-					"Infos :" };
-
-			@Override
-			public int getSize() {
-				return this.values.length;
-			}
-
-			@Override
-			public Object getElementAt(int index) {
-				return this.values[index];
-			}
-		});
-		panel_11.add(list, BorderLayout.NORTH);
-
-		JPanel panel_13 = new JPanel();
-		panel_4.add(panel_13, BorderLayout.CENTER);
-		panel_13.setLayout(new BorderLayout(0, 0));
-
-		JPanel panel_14 = new JPanel();
-		panel_13.add(panel_14, BorderLayout.NORTH);
-		panel_14.setLayout(new BorderLayout(0, 0));
+		JLabel lblNewLabel_2 = new JLabel("Nom : ");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_7.add(lblNewLabel_2);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(
-				new String[] { "Imprimante d'en haut", "Photocopieuse de droite", "Imprimante centrale" }));
-		panel_14.add(comboBox, BorderLayout.WEST);
+		panel_7.add(comboBox);
 
-		JButton btnNewButton_5 = new JButton("    Propriétés...   ");
-		btnNewButton_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_14.add(btnNewButton_5, BorderLayout.EAST);
+		JPanel panel_13 = new JPanel();
+		panel_4.add(panel_13);
+		panel_13.setLayout(new GridLayout(0, 2, 0, 0));
 
-		JPanel panel_15 = new JPanel();
-		panel_13.add(panel_15, BorderLayout.EAST);
+		Component horizontalGlue = Box.createHorizontalGlue();
+		horizontalGlue.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+		panel_13.add(horizontalGlue);
+
+		JButton btnNewButton_1 = new JButton("Propriete");
+		panel_13.add(btnNewButton_1);
+
+		JPanel panel_11 = new JPanel();
+		panel_4.add(panel_11);
+		panel_11.setLayout(new GridLayout(0, 3, 0, 0));
+
+		JLabel lblNewLabel_3 = new JLabel("Statut : ");
+		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_11.add(lblNewLabel_3);
+
+		JLabel lblNewLabel_6 = new JLabel("Acceptation des tâches ");
+		panel_11.add(lblNewLabel_6);
+		lblNewLabel_6.setHorizontalAlignment(SwingConstants.LEFT);
+
+		JPanel panel_11_2 = new JPanel();
+		panel_4.add(panel_11_2);
+		panel_11_2.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JCheckBox chckbxNewCheckBox = new JCheckBox("Imprimer dans un fichier");
-		chckbxNewCheckBox.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		chckbxNewCheckBox.setVerticalAlignment(SwingConstants.BOTTOM);
-		panel_15.add(chckbxNewCheckBox);
+		chckbxNewCheckBox.setHorizontalAlignment(SwingConstants.RIGHT);
+		panel_11_2.add(chckbxNewCheckBox);
 
-		JPanel panel_16 = new JPanel();
-		panel_13.add(panel_16, BorderLayout.WEST);
+		JPanel panel_11_1 = new JPanel();
+		panel_4.add(panel_11_1);
+		panel_11_1.setLayout(new GridLayout(0, 3, 0, 0));
 
-		JLabel lblNewLabel_2 = new JLabel("Acceptation des tâches");
-		panel_16.add(lblNewLabel_2);
+		JLabel lblNewLabel_4 = new JLabel("Type : ");
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_11_1.add(lblNewLabel_4);
+
+		JPanel panel_11_4 = new JPanel();
+		panel_4.add(panel_11_4);
+
+		JPanel panel_11_3 = new JPanel();
+		panel_4.add(panel_11_3);
+		panel_11_3.setLayout(new GridLayout(0, 3, 0, 0));
+
+		JLabel lblNewLabel_5 = new JLabel("Infos :");
+		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
+		panel_11_3.add(lblNewLabel_5);
+
+		JPanel panel_11_5 = new JPanel();
+		panel_4.add(panel_11_5);
 
 		JPanel panel_3 = new JPanel();
 		panel_2.add(panel_3);
@@ -249,6 +250,7 @@ public class Imprimer extends JFrame {
 		panel_5.add(lblNewLabel_7);
 
 		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 		panel_5.add(spinner);
 
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Collationner");
@@ -257,6 +259,9 @@ public class Imprimer extends JFrame {
 
 		JLabel label_3 = new JLabel("");
 		panel_5.add(label_3);
+
+		Component horizontalStrut = Box.createHorizontalStrut(32);
+		panel_3.add(horizontalStrut, BorderLayout.CENTER);
 
 		JPanel panel_12 = new JPanel();
 		panel_2.add(panel_12, BorderLayout.SOUTH);
