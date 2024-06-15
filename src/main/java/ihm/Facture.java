@@ -48,7 +48,7 @@ public class Facture extends JFrame {
 	 * Create the frame.
 	 */
 
-	public Facture(Coordonnées _coordonnées, Panier _panier, float shippingCost) {
+	public Facture(Coordonnées _coordonnées, Panier _panier, String modePaiement, float shippingCost) {
 		this.panier = _panier;
 		this.coordonnées = _coordonnées;
 		this.shippingCost = shippingCost;
@@ -158,20 +158,16 @@ public class Facture extends JFrame {
 
 		JLabel lblNewLabel_4 = new JLabel("FRAIS DE TRANSPORT : ");
 		panel_10.add(lblNewLabel_4);
-		String livraisonPrix = new String((panier.prixTotalPanier() >= 120.f ? (Float) 0.f : (Float) shippingCost).toString());
-		JLabel prixlivraison = new JLabel("New label");
+		JLabel prixlivraison = new JLabel(new String((panier.prixTotalPanier() >= 120.f ? (Float) 0.f : (Float) shippingCost).toString()));
 		panel_10.add(prixlivraison);
-		prixlivraison.setText(livraisonPrix);
 
 		JLabel lblNewLabel_7_1 = new JLabel(" €, ");
 		panel_10.add(lblNewLabel_7_1);
 		
-		System.out.println(shippingCost);
 		String livreur = changeNameShippingCompany(shippingCost);
 		
-		JLabel typedelivraison = new JLabel("New label");
+		JLabel typedelivraison = new JLabel((shippingCost != 0.f ? "Livraison par " : "") + livreur);
 		panel_10.add(typedelivraison);
-		typedelivraison.setText(livreur);
 
 		JPanel panel_11 = new JPanel();
 		panel_8.add(panel_11, BorderLayout.NORTH);
@@ -180,15 +176,13 @@ public class Facture extends JFrame {
 		JLabel lblNewLabel_5 = new JLabel("TOTAL TTC COMMANDE : ");
 		panel_11.add(lblNewLabel_5);
 
-		JLabel prixttccommande = new JLabel("New label");
+		JLabel prixttccommande = new JLabel(new String(((Float) panier.prixTotalPanier()).toString()));
 		panel_11.add(prixttccommande);
-		String prixcommande = new String(((Float) panier.prixTotalPanier()).toString());
-		prixttccommande.setText(prixcommande);
 
-		JLabel lblNewLabel_7 = new JLabel(" €");
+		JLabel lblNewLabel_7 = new JLabel(" €, ");
 		panel_11.add(lblNewLabel_7);
 
-		JLabel typeDePaiment = new JLabel("New label");
+		JLabel typeDePaiment = new JLabel("Paiement par " + modePaiement);
 		panel_11.add(typeDePaiment);
 
 
@@ -197,17 +191,17 @@ public class Facture extends JFrame {
 		panel_9.setLayout(new BoxLayout(panel_9, BoxLayout.X_AXIS));
 
 		JLabel lblNewLabel_6 = new JLabel("PRIX TOTAL TTC :");
-		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel_9.add(lblNewLabel_6);
 
 		String prixTotal = new String(((Float) (panier.totalPanier(shippingCost))).toString());
 		JLabel prixtotal = new JLabel("New label");
-		prixtotal.setFont(new Font("Tahoma", Font.BOLD, 11));
+		prixtotal.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel_9.add(prixtotal);
 		prixtotal.setText(prixTotal);
 
 		JLabel lblNewLabel_7_2 = new JLabel(" €");
-		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNewLabel_7_2.setFont(new Font("Tahoma", Font.BOLD, 16));
 		panel_9.add(lblNewLabel_7_2);
 		
 		JPanel panel_13 = new JPanel();

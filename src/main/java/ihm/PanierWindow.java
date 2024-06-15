@@ -34,6 +34,7 @@ public class PanierWindow extends JFrame {
 	private JTextField price_total;
 	private Panier panier;
 	private JComboBox cmb_transporter;
+	private JButton btn_validateBasket;
 
 	private static final String[] columnsName = { "Icône", "Nom", "Poids", "Prix à l'unité", "Quantité" };
 	private static Map<String, Float> transporters;
@@ -177,7 +178,7 @@ public class PanierWindow extends JFrame {
 		panel_afterTable.setRightComponent(panel_actions);
 		panel_actions.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JButton btn_validateBasket = new JButton("Valider le panier");
+		btn_validateBasket = new JButton("Valider le panier");
 		btn_validateBasket.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -215,6 +216,8 @@ public class PanierWindow extends JFrame {
 
 		panel_actions.add(btn_continueShopping);
 		FillTable(panier);
+		RefreshPrices(panier, prixLivraison, PanierWindow.this.price_exVAT,
+				PanierWindow.this.price_transportFees, PanierWindow.this.price_total);
 		RefreshShippingCost();
 		//RefreshPrices(panier, prixLivraison, this.price_exVAT, this.price_transportFees, this.price_total);
 	}
@@ -233,9 +236,11 @@ public class PanierWindow extends JFrame {
 			JTextField total) {
 		price.setText(String.valueOf(panier.prixTotalPanier()));
 		transportfees
-				.setText(panier.prixTotalPanier() >= Panier.PRIX_OFFRE_LIVRAISON || panier.getTaillePanier() == 0 ? "0"
+				.setText(panier.prixTotalPanier() >= Panier.PRIX_OFFRE_LIVRAISON || panier.getTaillePanier() == 0 ? "0.0"
 						: String.valueOf(tfees));
 		total.setText(String.valueOf(panier.totalPanier(tfees)));
+		
+		btn_validateBasket.setEnabled(panier.getTaillePanier() != 0);
 	}
 
 	@SuppressWarnings("serial")

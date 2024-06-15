@@ -177,6 +177,18 @@ public class CoordonnéesWindow extends JFrame {
 		return srcImg.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 	}
 	
+	private String getModePaiement()
+	{
+		if (this.paypalRadioButton.isSelected()) {
+			return "PayPal";
+		} else if (this.creditCardRadioButton.isSelected()) {
+			return "Carte de crédit";
+		} else if (this.chequeRadioButton.isSelected()) {
+			return "Chèque";
+		}
+		return "Erreur dans la sélection du mode de paiement.";
+	}
+	
 	private void fillField(JButton validerButton) {
 		validerButton.addActionListener(e -> {
 			if ((!paypalRadioButton.isSelected() && !creditCardRadioButton.isSelected() && !chequeRadioButton.isSelected())
@@ -186,15 +198,9 @@ public class CoordonnéesWindow extends JFrame {
 				new ErreurCoordWindow().setVisible(true);
 			}else {
 				
-				String modePaiement = "";
+				String modePaiement = getModePaiement();
 				boolean abbNewsletter = false;
-				if (this.paypalRadioButton.isSelected()) {
-					modePaiement = "PayPal";
-				} else if (this.creditCardRadioButton.isSelected()) {
-					modePaiement = "Carte de crédit";
-				} else if (this.chequeRadioButton.isSelected()) {
-					modePaiement = "Paiement par chèque";
-				}
+
 				
 				if (ouiRadioButton.isSelected()) {
 					abbNewsletter = true;
@@ -205,7 +211,7 @@ public class CoordonnéesWindow extends JFrame {
 						codePostalField.getText(), villeField.getText(),
 						telephoneField.getText(), mailField.getText(),modePaiement,abbNewsletter);
 				
-				new Facture(coordonnées,panier, shippingCost).setVisible(true);
+				new Facture(coordonnées,panier, modePaiement, shippingCost).setVisible(true);
 				this.dispose();
 				
 			}
