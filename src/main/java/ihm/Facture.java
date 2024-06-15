@@ -152,7 +152,7 @@ public class Facture extends JFrame {
 
 		this.table = new JTable();
 		this.table.setModel(
-				new DefaultTableModel(data, new String[] { "Produits", "Prix unitaire", "Quantités", "Prix TTC" }));
+				new DefaultTableModel(data, columnsName));
 		scrollPane.setViewportView(this.table);
 
 		JPanel panel_8 = new JPanel();

@@ -100,6 +100,7 @@ public class PanierWindow extends JFrame {
 		splitPane_2.setRightComponent(lblNewLabel);
 
 		this.products = new JTable();
+		this.products.setModel(new DefaultTableModel(new String[][] {}, columnsName));
 		this.products.setRowSelectionAllowed(false);
 
 		splitPane_1.setRightComponent(this.products);
