@@ -8,6 +8,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -119,7 +121,18 @@ public class NosFromages extends JFrame {
 
 	private void refreshList(DefaultListModel<String> DLM, JComboBox<String> typeDeLait) {
 		DLM.removeAllElements();
-		for (Fromage f : this.listFromages.getFromages()) {
+		
+		// J'ai dû écrire ça pour pas modifier l'UML de fromage. J'ai apprécié.
+		Function<Fromage, Integer> getQuantiteTotaleArticles = (Fromage f) -> {
+			AtomicInteger sumArticles = new AtomicInteger(0);
+			f.getArticles().forEach(article -> { sumArticles.addAndGet(article.getQuantitéEnStock()); });
+			return sumArticles.get();
+		};
+		
+		for (Fromage f : this.listFromages.getFromages()) {	
+			// n'affiche pas le fromage dans la liste si aucun de ses articles n'est disponible			
+			if(getQuantiteTotaleArticles.apply(f) == 0)
+				continue;
 			if (f.getTypeFromage().getTypeDeLait() == typeDeLait.getSelectedItem()) {
 				DLM.addElement(f.getDésignation());
 			} else if (typeDeLait.getSelectedItem() == "Tous") {

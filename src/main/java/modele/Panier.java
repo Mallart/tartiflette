@@ -73,6 +73,8 @@ public class Panier {
 
 	public float totalPanier(float fraisDePort) {
 		float prix = totalSansFraisDePort();
+		if(prix == 0.f)
+			return 0.f;
 		if (prix >= PRIX_OFFRE_LIVRAISON) {
 			return prix;
 		} else {

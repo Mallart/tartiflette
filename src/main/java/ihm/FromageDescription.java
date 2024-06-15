@@ -111,7 +111,8 @@ public class FromageDescription extends JFrame {
 		cmb_selectPrice.setModel(new DefaultComboBoxModel<String>() {
 			{
 				for (Article article : fromage.getArticles()) {
-					addElement("Prix TTC: " + article.getPrixTTC());
+					if(article.getQuantitéEnStock() > 0)
+						addElement("Prix TTC: " + article.getPrixTTC());
 				}
 			}
 		});

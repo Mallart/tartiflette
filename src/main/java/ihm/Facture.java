@@ -52,7 +52,7 @@ public class Facture extends JFrame {
 		this.panier = _panier;
 		this.coordonnées = _coordonnées;
 		this.shippingCost = shippingCost;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -247,19 +247,10 @@ public class Facture extends JFrame {
 	}
 
 	private String changeNameShippingCompany(float shippingCost) {
-		String livreur;
-		if (shippingCost == 47.f){
-			livreur = new String("livraison par FedEx");
-		}else if(shippingCost == 11.f){
-			livreur = new String("livraison par Colissimo");
-		}else if(shippingCost == 10.5f){
-			livreur = new String("livraison par La Poste");
-		}else if(shippingCost == 0.10f){
-			livreur = new String("livraison de Papi");
-		}else{
-			livreur = new String("livraison offerte"); 
-		}
-		return livreur;
+		for(String nomLivreur : PanierWindow.getTransporters().keySet())
+			if(shippingCost == PanierWindow.getTransporters().get(nomLivreur))
+				return nomLivreur;
+		return "livraison offerte";
 	}
 	
 	private void fillTable(Panier panier) {

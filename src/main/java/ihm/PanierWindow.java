@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 import modele.Article;
 import modele.Panier;
+import javax.swing.SwingConstants;
 
 public class PanierWindow extends JFrame {
 
@@ -32,9 +33,10 @@ public class PanierWindow extends JFrame {
 	private JTextField price_transportFees;
 	private JTextField price_total;
 	private Panier panier;
+	private JComboBox cmb_transporter;
 
 	private static final String[] columnsName = { "Icône", "Nom", "Poids", "Prix à l'unité", "Quantité" };
-	private Map<String, Float> transporters;
+	private static Map<String, Float> transporters;
 
 	/**
 	 * Launch the application.
@@ -67,7 +69,7 @@ public class PanierWindow extends JFrame {
 			}
 		};
 		this.panier = _panier;
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -89,9 +91,10 @@ public class PanierWindow extends JFrame {
 
 		JLabel imm_vPanier = new JLabel("Votre panier:");
 		splitPane_2.setLeftComponent(imm_vPanier);
-
-		JButton btn_recalc_Basket = new JButton("Recalculer le panier");
-		splitPane_2.setRightComponent(btn_recalc_Basket);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+		splitPane_2.setRightComponent(lblNewLabel);
 
 		this.products = new JTable();
 		this.products.setRowSelectionAllowed(false);
@@ -115,16 +118,15 @@ public class PanierWindow extends JFrame {
 		JLabel img_transporterLogo = new JLabel("transporter.jpg");
 		panel_transport.add(img_transporterLogo, BorderLayout.WEST);
 
-		JComboBox<String> cmb_transporter = new JComboBox<String>();
+		cmb_transporter = new JComboBox<String>();
 		
 		
 		cmb_transporter.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Actualise la valeur des frais de transport
-				float transport = PanierWindow.this.transporters.get(cmb_transporter.getSelectedItem());
-				RefreshPrices(panier, transport, PanierWindow.this.price_exVAT, PanierWindow.this.price_transportFees,
-						PanierWindow.this.price_total);
+				RefreshShippingCost();
+
 			}
 		});
 		panel_transport.add(cmb_transporter, BorderLayout.EAST);
@@ -212,8 +214,9 @@ public class PanierWindow extends JFrame {
 		cmb_transporter.setSelectedIndex(0);
 
 		panel_actions.add(btn_continueShopping);
-		RefreshPrices(panier, prixLivraison, this.price_exVAT, this.price_transportFees, this.price_total);
 		FillTable(panier);
+		RefreshShippingCost();
+		//RefreshPrices(panier, prixLivraison, this.price_exVAT, this.price_transportFees, this.price_total);
 	}
 
 	private void EmptyBasket(Panier panier) {
@@ -255,6 +258,19 @@ public class PanierWindow extends JFrame {
 					((Integer) panier.nombreOccurencesArticle(article)).toString() });
 		}
 		this.products.setModel(dtm);
+	}
+	
+	private void RefreshShippingCost()
+	{
+		float transport = PanierWindow.transporters.get(cmb_transporter.getSelectedItem());
+		RefreshPrices(panier, transport, PanierWindow.this.price_exVAT, PanierWindow.this.price_transportFees,
+				PanierWindow.this.price_total);
+	}
+	
+	public static Map<String, Float> getTransporters()
+	{
+		// Copie la map pour ne pas modifier les valeurs du programme
+		return new HashMap<String, Float>(transporters);
 	}
 
 }
