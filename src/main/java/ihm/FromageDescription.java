@@ -28,6 +28,8 @@ import modele.Panier;
 public class FromageDescription extends JFrame {
 
 	private JPanel contentPane;
+	private Fromage fromage;
+	private Panier panier;
 
 	/**
 	 * Launch the application.
@@ -55,7 +57,13 @@ public class FromageDescription extends JFrame {
 	 * Create the frame.
 	 */
 	public FromageDescription(Fromage fromage, Panier panier) {
-
+		this.fromage = fromage;
+		this.panier = panier;
+		Init();
+	}
+	
+	private void Init()
+	{
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setBounds(100, 100, 684, 406);
 		this.contentPane = new JPanel();

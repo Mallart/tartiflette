@@ -55,10 +55,7 @@ public class PanierWindow extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	@SuppressWarnings("serial")
 	public PanierWindow(Panier _panier) {
 		this.transporters = new HashMap<String, Float>() {
@@ -70,6 +67,11 @@ public class PanierWindow extends JFrame {
 			}
 		};
 		this.panier = _panier;
+		Init();
+	}
+	
+	private void Init()
+	{
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
@@ -221,6 +223,9 @@ public class PanierWindow extends JFrame {
 		RefreshShippingCost();
 		//RefreshPrices(panier, prixLivraison, this.price_exVAT, this.price_transportFees, this.price_total);
 	}
+	/**
+	 * Create the frame.
+	 */
 
 	private void EmptyBasket(Panier panier) {
 		// Reremplir les stocks avant de vider le panier pour éviter les fuites de

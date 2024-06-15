@@ -35,6 +35,7 @@ public class Facture extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private String modePaiement;
 	private Coordonnées coordonnées;
 	private Panier panier;
 	private static final String[] columnsName = { "Nom", "Poids", "Prix à l'unité", "Quantité", "Total" };
@@ -51,9 +52,15 @@ public class Facture extends JFrame {
 	public Facture(Coordonnées _coordonnées, Panier _panier, String modePaiement, float shippingCost) {
 		this.panier = _panier;
 		this.coordonnées = _coordonnées;
+		this.modePaiement = modePaiement;
 		this.shippingCost = shippingCost;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 586, 511);
+		Init();
+	}
+	
+	private void Init()
+	{
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -237,7 +244,6 @@ public class Facture extends JFrame {
 		this.contentPane.add(panel_12, BorderLayout.SOUTH);
 		panel_12.setLayout(new BorderLayout(0, 0));
 		fillTable(panier);
-		
 	}
 
 	private String changeNameShippingCompany(float shippingCost) {

@@ -35,7 +35,10 @@ public class Imprimer extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JPanel panel_nbPages;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
+	private JRadioButton rdbtn_printWhole;
+	private JRadioButton rdbtn_printPages;
 
 	/**
 	 * Launch the application.
@@ -58,6 +61,11 @@ public class Imprimer extends JFrame {
 	 * Create the frame.
 	 */
 	public Imprimer() {
+		Init();
+	}
+	
+	private void Init()
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 309);
 		this.contentPane = new JPanel();
@@ -207,36 +215,42 @@ public class Imprimer extends JFrame {
 		panel_6.add(panel_9, BorderLayout.NORTH);
 		panel_9.setLayout(new BorderLayout(0, 0));
 
-		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Tout");
-		this.buttonGroup.add(rdbtnNewRadioButton_1);
-		rdbtnNewRadioButton_1.setSelected(true);
-		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_9.add(rdbtnNewRadioButton_1);
-
-		JPanel panel_8 = new JPanel();
-		panel_6.add(panel_8, BorderLayout.SOUTH);
-
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Pages");
-		this.buttonGroup.add(rdbtnNewRadioButton);
-		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+		rdbtn_printWhole = new JRadioButton("Tout");
+		rdbtn_printWhole.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
+				switchEnablePagesToPrint();
 			}
 		});
-		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panel_8.add(rdbtnNewRadioButton);
+		this.buttonGroup.add(rdbtn_printWhole);
+		rdbtn_printWhole.setSelected(true);
+		rdbtn_printWhole.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_9.add(rdbtn_printWhole);
+
+		this.panel_nbPages = new JPanel();
+		panel_6.add(panel_nbPages, BorderLayout.SOUTH);
+
+		rdbtn_printPages = new JRadioButton("Pages");
+		this.buttonGroup.add(rdbtn_printPages);
+		rdbtn_printPages.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				switchEnablePagesToPrint();
+			}
+		});
+		rdbtn_printPages.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		panel_nbPages.add(rdbtn_printPages);
 
 		JSpinner spinner_1 = new JSpinner();
 		spinner_1.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-		panel_8.add(spinner_1);
+		panel_nbPages.add(spinner_1);
 
 		JLabel lblNewLabel_1 = new JLabel("A");
-		panel_8.add(lblNewLabel_1);
+		panel_nbPages.add(lblNewLabel_1);
 
 		JSpinner spinner_2 = new JSpinner();
 		spinner_2.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
-		panel_8.add(spinner_2);
+		panel_nbPages.add(spinner_2);
 
 		JPanel panel_10 = new JPanel();
 		panel_10.setAlignmentY(Component.BOTTOM_ALIGNMENT);
@@ -255,7 +269,7 @@ public class Imprimer extends JFrame {
 		panel_5.add(lblNewLabel_7);
 
 		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
+		spinner.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
 		panel_5.add(spinner);
 
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Collationner");
@@ -264,6 +278,17 @@ public class Imprimer extends JFrame {
 
 		Component horizontalStrut = Box.createHorizontalStrut(32);
 		panel_3.add(horizontalStrut, BorderLayout.CENTER);
+		switchEnablePagesToPrint();
+	}
+	
+	// Grise et désactive la section d'imprimerie des pages lorsqu'elle n'est pas sélectionnée
+	private void switchEnablePagesToPrint()
+	{
+		JSpinner spinner_1 = (JSpinner)this.panel_nbPages.getComponents()[1];
+		JLabel lblNewLabel_1 = (JLabel)this.panel_nbPages.getComponents()[2];
+		JSpinner spinner_2 = (JSpinner)this.panel_nbPages.getComponents()[3];
+		for(Component c : new Component[] {spinner_1, lblNewLabel_1, spinner_2})
+			c.setEnabled(!rdbtn_printWhole.isSelected() && rdbtn_printPages.isSelected());
 	}
 
 }

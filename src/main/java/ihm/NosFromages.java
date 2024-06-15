@@ -72,6 +72,11 @@ public class NosFromages extends JFrame {
 	public NosFromages(Fromages listFromages) {
 		this.panier = new Panier();
 		this.listFromages = listFromages;
+		Init();
+	}
+
+	private void Init()
+	{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		this.contentPane = new JPanel();
@@ -140,6 +145,7 @@ public class NosFromages extends JFrame {
 			}
 		}
 	}
+	
 
 	private void printListToVP(Fromages listFromages, JList<String> fromageJlist, DefaultListModel<String> DLM,
 			JComboBox<String> typeDeLait) {

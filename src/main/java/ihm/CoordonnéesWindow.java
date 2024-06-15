@@ -56,6 +56,11 @@ public class CoordonnéesWindow extends JFrame {
 		this.panier = _panier;
 		this.shippingCost = shippingCost;
 
+		Init();
+	}
+	
+	private void Init()
+	{
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel titleLabel = new JLabel("Vos coordonnées");
 		titleLabel.setFont(new Font("Serif", Font.BOLD, 24)); // Set the font size and style
