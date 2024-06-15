@@ -156,7 +156,7 @@ public class Imprimer extends JFrame {
 		horizontalGlue.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
 		panel_13.add(horizontalGlue);
 
-		JButton btnNewButton_1 = new JButton("Propriete");
+		JButton btnNewButton_1 = new JButton("Propriétés...");
 		panel_13.add(btnNewButton_1);
 
 		JPanel panel_11 = new JPanel();
