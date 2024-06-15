@@ -123,7 +123,7 @@ public class Imprimer extends JFrame {
 		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_4 = new JPanel();
-		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panel_4.setBorder(null);
 		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -190,9 +190,6 @@ public class Imprimer extends JFrame {
 		lblNewLabel_5.setHorizontalAlignment(SwingConstants.CENTER);
 		panel_11_3.add(lblNewLabel_5);
 
-		JPanel panel_11_5 = new JPanel();
-		panel_4.add(panel_11_5);
-
 		JPanel panel_12 = new JPanel();
 		panel_2.add(panel_12);
 
@@ -203,7 +200,6 @@ public class Imprimer extends JFrame {
 		JPanel panel_6 = new JPanel();
 		panel_6.setName("");
 		panel_6.setToolTipText("");
-		panel_6.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(panel_6, BorderLayout.WEST);
 		panel_6.setLayout(new BorderLayout(0, 0));
 
@@ -251,7 +247,6 @@ public class Imprimer extends JFrame {
 		JPanel panel_5 = new JPanel();
 		panel_5.setSize(new Dimension(5500, 0));
 		panel_5.setAlignmentX(Component.LEFT_ALIGNMENT);
-		panel_5.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		panel_3.add(panel_5, BorderLayout.EAST);
 		panel_5.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -266,9 +261,6 @@ public class Imprimer extends JFrame {
 		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Collationner");
 		chckbxNewCheckBox_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_5.add(chckbxNewCheckBox_1);
-
-		JLabel label_3 = new JLabel("");
-		panel_5.add(label_3);
 
 		Component horizontalStrut = Box.createHorizontalStrut(32);
 		panel_3.add(horizontalStrut, BorderLayout.CENTER);
