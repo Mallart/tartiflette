@@ -24,7 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSpinner;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -34,8 +33,6 @@ public class Imprimer extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField_1;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -119,13 +116,12 @@ public class Imprimer extends JFrame {
 		panel_1.add(btnNewButton_4, gbc_btnNewButton_4);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 2));
 		this.contentPane.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new BorderLayout(0, 0));
+		panel_2.setLayout(new GridLayout(0, 1, 0, 0));
 
 		JPanel panel_4 = new JPanel();
 		panel_4.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_2.add(panel_4, BorderLayout.NORTH);
+		panel_2.add(panel_4);
 		panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 
 		JPanel panel_7 = new JPanel();
@@ -192,8 +188,11 @@ public class Imprimer extends JFrame {
 		JPanel panel_11_5 = new JPanel();
 		panel_4.add(panel_11_5);
 
+		JPanel panel_12 = new JPanel();
+		panel_2.add(panel_12);
+
 		JPanel panel_3 = new JPanel();
-		panel_2.add(panel_3);
+		panel_12.add(panel_3);
 		panel_3.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel_6 = new JPanel();
@@ -216,21 +215,25 @@ public class Imprimer extends JFrame {
 		panel_6.add(panel_8, BorderLayout.SOUTH);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Pages");
+		rdbtnNewRadioButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
 		rdbtnNewRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_8.add(rdbtnNewRadioButton);
 
-		this.textField_1 = new JTextField();
-		this.textField_1.setText("1");
-		this.textField_1.setColumns(10);
-		panel_8.add(this.textField_1);
+		JSpinner spinner_1 = new JSpinner();
+		spinner_1.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+		panel_8.add(spinner_1);
 
 		JLabel lblNewLabel_1 = new JLabel("A");
 		panel_8.add(lblNewLabel_1);
 
-		this.textField = new JTextField();
-		this.textField.setText("1");
-		this.textField.setColumns(10);
-		panel_8.add(this.textField);
+		JSpinner spinner_2 = new JSpinner();
+		spinner_2.setModel(new SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+		panel_8.add(spinner_2);
 
 		JPanel panel_10 = new JPanel();
 		panel_10.setAlignmentY(Component.BOTTOM_ALIGNMENT);
@@ -262,9 +265,6 @@ public class Imprimer extends JFrame {
 
 		Component horizontalStrut = Box.createHorizontalStrut(32);
 		panel_3.add(horizontalStrut, BorderLayout.CENTER);
-
-		JPanel panel_12 = new JPanel();
-		panel_2.add(panel_12, BorderLayout.SOUTH);
 	}
 
 }
