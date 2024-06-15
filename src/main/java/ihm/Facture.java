@@ -254,11 +254,11 @@ public class Facture extends JFrame {
 	}
 	
 	private void fillTable(Panier panier) {
-		DefaultTableModel dtm = new DefaultTableModel(columnsName, 0) {
+		DefaultTableModel dtm = new DefaultTableModel(columnsName,0) {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				if (column == columnsName.length - 1) {
-					return true;
+					return false;
 				}
 				return false;
 			}
