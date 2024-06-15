@@ -29,7 +29,7 @@ import modele.Panier;
 public class NosFromages extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNomDuFromage;
+	private JLabel txtNomDuFromage;
 	private Fromages listFromages;
 	private Panier panier;
 
@@ -100,11 +100,9 @@ public class NosFromages extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.SOUTH);
 		panel_1.setLayout(new BorderLayout(0, 0));
-		this.txtNomDuFromage = new JTextField();
-		this.txtNomDuFromage.setText("Nom du fromage");
-		this.txtNomDuFromage.setToolTipText("NomFromgage");
+		this.txtNomDuFromage = new JLabel("Nom du fromage");
+		this.txtNomDuFromage.setToolTipText("NomFromage");
 		panel_1.add(this.txtNomDuFromage, BorderLayout.CENTER);
-		this.txtNomDuFromage.setColumns(10);
 
 		String typeDeLaitArray[] = { "Tous", "Vache", "Chèvre", "Brebis" };
 		JComboBox<String> selectionDeLait = new JComboBox<String>(typeDeLaitArray);
