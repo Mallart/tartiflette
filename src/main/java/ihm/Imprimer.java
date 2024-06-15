@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -33,6 +35,7 @@ public class Imprimer extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
 
 	/**
 	 * Launch the application.
@@ -133,6 +136,8 @@ public class Imprimer extends JFrame {
 		panel_7.add(lblNewLabel_2);
 
 		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(
+				new DefaultComboBoxModel(new String[] { "Imprimante Intel", "Imprimante Sony", "Imprimante Epson" }));
 		panel_7.add(comboBox);
 
 		JPanel panel_13 = new JPanel();
@@ -207,6 +212,7 @@ public class Imprimer extends JFrame {
 		panel_9.setLayout(new BorderLayout(0, 0));
 
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Tout");
+		this.buttonGroup.add(rdbtnNewRadioButton_1);
 		rdbtnNewRadioButton_1.setSelected(true);
 		rdbtnNewRadioButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panel_9.add(rdbtnNewRadioButton_1);
@@ -215,6 +221,7 @@ public class Imprimer extends JFrame {
 		panel_6.add(panel_8, BorderLayout.SOUTH);
 
 		JRadioButton rdbtnNewRadioButton = new JRadioButton("Pages");
+		this.buttonGroup.add(rdbtnNewRadioButton);
 		rdbtnNewRadioButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
